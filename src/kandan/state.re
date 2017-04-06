@@ -64,6 +64,7 @@ type appState = {
   rightSidebarOpen: bool,
   leftSidebarOpen: bool,
   selectedChannelId: channelId,
+  asideChannelId: option channelId,
   userId: option userId,
   users: list user,
   channels: list channel,
@@ -87,6 +88,7 @@ type action =
   | SearchUpdated (option string)
   | ChannelSelected channel
   | ChannelSelectedByIndex int
+  | ChannelFocused (option channelId)
   | SongSelected channel media
   | MediaStateUpdated channel mediaPlayerState
   | MediaPlayerScrubbed channel float float
@@ -112,6 +114,7 @@ let stringOfAction (action: action) =>
   | SearchUpdated _ => "SearchUpdated"
   | ChannelSelected _ => "ChannelSelected"
   | ChannelSelectedByIndex _ => "ChannelSelectedByIndex"
+  | ChannelFocused _ => "ChannelFocused"
   | SongSelected _ _ [@implicit_arity] => "SongSelected"
   | MediaStateUpdated _ _ [@implicit_arity] => "MediaStateUpdated"
   | MediaPlaybackFinished _ => "MediaPlaybackFinished"

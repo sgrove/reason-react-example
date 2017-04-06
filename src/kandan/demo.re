@@ -69,6 +69,7 @@ let state =
     rightSidebarOpen: false,
     leftSidebarOpen: false,
     selectedChannelId: 2,
+    asideChannelId: None,
     users: [
       {id: 1, email: "sean@bushi.do", name: Some "Sean Grove", status: Online, username: "sgrove"},
       {

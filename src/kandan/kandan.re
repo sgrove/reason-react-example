@@ -212,37 +212,46 @@ let text = ReactRe.stringToElement;
        </div>;
    }; */
 let searchField searchTerm onSearchUpdated =>
-  <input
-    _type="text"
-    placeholder="Search..."
-    className="query"
-    value=(
-            switch searchTerm {
-            | None => ""
-            | Some term => term
-            }
-          )
-    onChange=(
-               fun event => {
-                 let x =
-                   switch (
-                     ReasonJs.Dom.HtmlElement.value (
-                       Utils.domAsHtmlElement (ReactEventRe.Form.target event)
-                     )
-                   ) {
-                   | "" => None
-                   | term => Some term
-                   };
-                 onSearchUpdated x
-               }
-             )
-    onKeyDown=(
-                fun event =>
-                  if (ReactEventRe.Keyboard.which event == 13) {
-                    ReactEventRe.Keyboard.preventDefault event
-                  }
-              )
-  />;
+  <div>
+    <input
+      _type="text"
+      placeholder="Search..."
+      className="query"
+      value=(
+              switch searchTerm {
+              | None => ""
+              | Some term => term
+              }
+            )
+      onChange=(
+                 fun event => {
+                   let x =
+                     switch (
+                       ReasonJs.Dom.HtmlElement.value (
+                         Utils.domAsHtmlElement (ReactEventRe.Form.target event)
+                       )
+                     ) {
+                     | "" => None
+                     | term => Some term
+                     };
+                   onSearchUpdated x
+                 }
+               )
+      onKeyDown=(
+                  fun event =>
+                    if (ReactEventRe.Keyboard.which event == 13) {
+                      ReactEventRe.Keyboard.preventDefault event
+                    }
+                )
+    />
+    <Icon name="search" />
+    <Icon name="sound-off" />
+    <Icon name="sound-min" />
+    <Icon name="sound-med" />
+    <Icon name="sound-max" />
+    <Icon name="user" />
+    <Icon name="users" />
+  </div>;
 
 module Wip = {
   include ReactRe.Component.Stateful;
@@ -282,7 +291,12 @@ module Wip = {
       }
     );
   let channelSelected {state} channel =>
-    Some State.{...state, selectedChannelId: channel.id, title: channel.title ^ " - Kandan"};
+    Some State.{
+           ...state,
+           selectedChannelId: channel.id,
+           asideChannelId: Some channel.id,
+           title: channel.title ^ " - Kandan"
+         };
   let songSelected {state} (channel: State.channel) (media: State.media) => {
     let currentChannel =
       State.(List.find (fun haystack => haystack.id === channel.id) state.channels);
@@ -432,6 +446,7 @@ module Wip = {
     | MediaPlaybackFinished _
     | MediaLoadProgressUpdated _ _ _
     | ChatBoxFocused _
+    | ChannelFocused _
     | UserMenuToggled _
     | VolumeSet _
     | VolumeDecremented _
@@ -459,6 +474,7 @@ module Wip = {
       | VolumeMuteToggled => volumeMuteToggled componentBag
       | SearchUpdated needle => searchUpdated componentBag needle
       | SidebarToggled which opened => sidebarToggled componentBag which opened
+      | ChannelFocused channelId => Some {...componentBag.state, asideChannelId: channelId}
       | ChannelSelected channel => channelSelected componentBag channel
       | ChannelSelectedByIndex idx =>
         let sortedChannels =
@@ -722,7 +738,7 @@ module Wip = {
           <span> (ReactRe.stringToElement (Utils.nameOfUser user)) </span>
         </li>
       );
-    let channelEntry (channel: State.channel) => {
+    let channelEntry spotlightChannelId (channel: State.channel) => {
       open State;
       let channelUsers =
         state.users |>
@@ -731,12 +747,39 @@ module Wip = {
           fun a b =>
             compare (String.lowercase (Utils.nameOfUser a)) (String.lowercase (Utils.nameOfUser b))
         );
-      <div onClick=(fun _ => dispatchEL (ChannelSelected channel) ()) className="menu-item">
-        (text channel.title)
-        <ul className="channel-users-list">
-          (ReactRe.listToElement (List.map userEntry channelUsers))
-        </ul>
-      </div>
+      let filteredUsers =
+        switch state.search {
+        | None => channelUsers
+        | Some term =>
+          channelUsers |>
+          List.filter (
+            fun (user: user) =>
+              switch (
+                Local_string.indexOf
+                  (Local_string.lowerCase (Utils.nameOfUser user)) (Local_string.lowerCase term)
+              ) {
+              | (-1) => false
+              | _ => true
+              }
+          )
+        };
+      let userEntries =
+        switch spotlightChannelId {
+        | None => ReactRe.nullElement
+        | Some _ =>
+          <ul className="channel-users-list">
+            (ReactRe.listToElement (List.map userEntry filteredUsers))
+          </ul>
+        };
+      let channelEntry =
+        <div onClick=(fun _ => dispatchEL (ChannelSelected channel) ()) className="menu-item">
+          (text channel.title)
+          userEntries
+        </div>;
+      switch spotlightChannelId {
+      | None => channelEntry
+      | Some channelId => channelId == channel.id ? channelEntry : ReactRe.nullElement
+      }
     };
     let songEntry media =>
       <li
@@ -788,7 +831,22 @@ module Wip = {
         <div className="menu left">
           <div className="menu-items channels">
             (searchField state.search (fun term => dispatchEL (SearchUpdated term) ()))
-            (ReactRe.listToElement (List.map channelEntry filteredChannels))
+            (
+              ReactRe.listToElement
+                State.(
+                  List.map
+                    (channelEntry state.asideChannelId)
+                    (
+                      switch state.asideChannelId {
+                      | None => filteredChannels
+                      | Some _ => sortedChannels
+                      }
+                    )
+                )
+            )
+            <button onClick=(fun _event => dispatchEL State.(ChannelFocused None) ())>
+              (text "Back")
+            </button>
           </div>
         </div>
         <div className="chat">
@@ -941,7 +999,16 @@ module Wip = {
         </div>
         <div className="right controls">
           <div className="mute" onClick=(fun _ => dispatchEL VolumeMuteToggled ())>
-            (text "<))")
+            <Icon
+              name=(
+                     switch state.volume {
+                     | v when v < 0.1 => "sound-off"
+                     | v when v < 0.11 => "sound-min"
+                     | v when v < 0.51 => "sound-med"
+                     | _ => "sound-max"
+                     }
+                   )
+            />
           </div>
           <div className="volume slider">
             <Progress_bar

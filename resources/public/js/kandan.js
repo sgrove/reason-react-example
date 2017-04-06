@@ -939,12 +939,12 @@
 	}
 
 	function findMeOpt(state) {
-	  var match = state[/* userId */3];
+	  var match = state[/* userId */4];
 	  if (match) {
 	    var id = match[0];
 	    return /* Some */[List.find(function (user) {
 	                  return +(id === user[/* id */0]);
-	                }, state[/* users */4])];
+	                }, state[/* users */5])];
 	  } else {
 	    return /* None */0;
 	  }
@@ -9162,6 +9162,7 @@
 	'use strict';
 
 	var Demo                    = __webpack_require__(72);
+	var Icon                    = __webpack_require__(240);
 	var List                    = __webpack_require__(5);
 	var $$Array                 = __webpack_require__(24);
 	var Block                   = __webpack_require__(7);
@@ -9187,7 +9188,7 @@
 	function findCurrentChannel(state) {
 	  return List.find(function (haystack) {
 	              return +(haystack[/* id */0] === state[/* selectedChannelId */2]);
-	            }, state[/* channels */5]);
+	            }, state[/* channels */6]);
 	}
 
 	function nativeOfTimeRanges(ranges) {
@@ -9232,7 +9233,7 @@
 	          }
 	        })(users);
 	  var message = Demo.generateMessage(userId, otherUsers);
-	  return /* MsgSubmitted */Block.__(13, [
+	  return /* MsgSubmitted */Block.__(14, [
 	            channel,
 	            message
 	          ]);
@@ -9352,25 +9353,25 @@
 	}
 
 	function searchField(searchTerm, onSearchUpdated) {
-	  return React.createElement("input", {
-	              className: "query",
-	              placeholder: "Search...",
-	              type: "text",
-	              value: searchTerm ? searchTerm[0] : "",
-	              onKeyDown: function ($$event) {
-	                if ($$event.which === 13) {
-	                  $$event.preventDefault();
-	                  return /* () */0;
-	                } else {
-	                  return 0;
-	                }
-	              },
-	              onChange: function ($$event) {
-	                var term = $$event.target.value;
-	                var $js = term === "" ? /* None */0 : /* Some */[term];
-	                return Curry._1(onSearchUpdated, $js);
-	              }
-	            });
+	  return React.createElement("div", undefined, React.createElement("input", {
+	                  className: "query",
+	                  placeholder: "Search...",
+	                  type: "text",
+	                  value: searchTerm ? searchTerm[0] : "",
+	                  onKeyDown: function ($$event) {
+	                    if ($$event.which === 13) {
+	                      $$event.preventDefault();
+	                      return /* () */0;
+	                    } else {
+	                      return 0;
+	                    }
+	                  },
+	                  onChange: function ($$event) {
+	                    var term = $$event.target.value;
+	                    var $js = term === "" ? /* None */0 : /* Some */[term];
+	                    return Curry._1(onSearchUpdated, $js);
+	                  }
+	                }), Curry._4(Icon.createElement("search"), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Icon.createElement("sound-off"), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Icon.createElement("sound-min"), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Icon.createElement("sound-med"), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Icon.createElement("sound-max"), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Icon.createElement("user"), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Icon.createElement("users"), /* [] */0, /* None */0, /* None */0, /* () */0));
 	}
 
 	var include = ReactRe.Component[/* Stateful */8];
@@ -9410,46 +9411,46 @@
 	    var search = needle[0];
 	    if (search === "") {
 	      var newrecord = state.slice();
-	      return /* Some */[(newrecord[/* search */9] = /* None */0, newrecord)];
+	      return /* Some */[(newrecord[/* search */10] = /* None */0, newrecord)];
 	    } else {
 	      var newrecord$1 = state.slice();
-	      return /* Some */[(newrecord$1[/* search */9] = /* Some */[search], newrecord$1)];
+	      return /* Some */[(newrecord$1[/* search */10] = /* Some */[search], newrecord$1)];
 	    }
 	  } else {
 	    var newrecord$2 = state.slice();
-	    return /* Some */[(newrecord$2[/* search */9] = /* None */0, newrecord$2)];
+	    return /* Some */[(newrecord$2[/* search */10] = /* None */0, newrecord$2)];
 	  }
 	}
 
 	function volumeSet(param, volume) {
 	  var state = param[/* state */0];
 	  var newrecord = state.slice();
-	  return /* Some */[(newrecord[/* volume */11] = volume, newrecord[/* lastVolume */12] = state[/* volume */11], newrecord)];
+	  return /* Some */[(newrecord[/* volume */12] = volume, newrecord[/* lastVolume */13] = state[/* volume */12], newrecord)];
 	}
 
 	function volumeDecremented(param, delta) {
 	  var state = param[/* state */0];
 	  var newrecord = state.slice();
-	  return /* Some */[(newrecord[/* volume */11] = Pervasives.max(0.0, state[/* volume */11] - delta), newrecord[/* lastVolume */12] = state[/* volume */11], newrecord)];
+	  return /* Some */[(newrecord[/* volume */12] = Pervasives.max(0.0, state[/* volume */12] - delta), newrecord[/* lastVolume */13] = state[/* volume */12], newrecord)];
 	}
 
 	function volumeIncremented(param, delta) {
 	  var state = param[/* state */0];
 	  var newrecord = state.slice();
-	  return /* Some */[(newrecord[/* volume */11] = Pervasives.min(1.0, state[/* volume */11] + delta), newrecord[/* lastVolume */12] = state[/* volume */11], newrecord)];
+	  return /* Some */[(newrecord[/* volume */12] = Pervasives.min(1.0, state[/* volume */12] + delta), newrecord[/* lastVolume */13] = state[/* volume */12], newrecord)];
 	}
 
 	function volumeMuteToggled(param) {
 	  var state = param[/* state */0];
 	  var newrecord = state.slice();
-	  var match = +(state[/* volume */11] === 0.0);
-	  newrecord[/* volume */11] = match !== 0 ? state[/* lastVolume */12] : 0.0;
-	  return /* Some */[(newrecord[/* lastVolume */12] = state[/* volume */11], newrecord)];
+	  var match = +(state[/* volume */12] === 0.0);
+	  newrecord[/* volume */12] = match !== 0 ? state[/* lastVolume */13] : 0.0;
+	  return /* Some */[(newrecord[/* lastVolume */13] = state[/* volume */12], newrecord)];
 	}
 
 	function uriNavigated(param, newPath) {
 	  var state = param[/* state */0];
-	  var match = channelFromUri(state[/* channels */5], newPath);
+	  var match = channelFromUri(state[/* channels */6], newPath);
 	  if (match) {
 	    var newrecord = state.slice();
 	    return /* Some */[(newrecord[/* selectedChannelId */2] = match[0][/* id */0], newrecord)];
@@ -9460,17 +9461,17 @@
 
 	function channelSelected(param, channel) {
 	  var newrecord = param[/* state */0].slice();
-	  return /* Some */[(newrecord[/* selectedChannelId */2] = channel[/* id */0], newrecord[/* title */10] = channel[/* title */1] + " - Kandan", newrecord)];
+	  return /* Some */[(newrecord[/* selectedChannelId */2] = channel[/* id */0], newrecord[/* asideChannelId */3] = /* Some */[channel[/* id */0]], newrecord[/* title */11] = channel[/* title */1] + " - Kandan", newrecord)];
 	}
 
 	function songSelected(param, channel, media) {
 	  var state = param[/* state */0];
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  var newrecord = currentChannel.slice();
 	  newrecord[/* media */5] = media;
 	  newrecord[/* mediaScrubbedTo */9] = /* Some */[/* tuple */[
@@ -9482,17 +9483,17 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$1 = state.slice();
-	  return /* Some */[(newrecord$1[/* channels */5] = newChannels, newrecord$1)];
+	  return /* Some */[(newrecord$1[/* channels */6] = newChannels, newrecord$1)];
 	}
 
 	function mediaPlaybackFinished(param, channel) {
 	  var state = param[/* state */0];
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  console.log("Finding next media from " + Pervasives.string_of_int(channel[/* media */5][/* order */0]));
 	  var media = Utils.findNextMedia(channel, 1);
 	  console.log("\tFound " + Pervasives.string_of_int(media[/* order */0]));
@@ -9507,17 +9508,17 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$1 = state.slice();
-	  return /* Some */[(newrecord$1[/* channels */5] = newChannels, newrecord$1)];
+	  return /* Some */[(newrecord$1[/* channels */6] = newChannels, newrecord$1)];
 	}
 
 	function mediaStateUpdated(param, channel, newState) {
 	  var state = param[/* state */0];
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  var newChannel;
 	  if (newState !== 0) {
 	    var newrecord = currentChannel.slice();
@@ -9538,17 +9539,17 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$2 = state.slice();
-	  return /* Some */[(newrecord$2[/* channels */5] = newChannels, newrecord$2)];
+	  return /* Some */[(newrecord$2[/* channels */6] = newChannels, newrecord$2)];
 	}
 
 	function mediaProgressUpdated(param, channel, progress, duration) {
 	  var state = param[/* state */0];
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  var init = currentChannel[/* media */5];
 	  var media_000 = /* order */init[/* order */0];
 	  var media_001 = /* src */init[/* src */1];
@@ -9570,17 +9571,17 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$1 = state.slice();
-	  return /* Some */[(newrecord$1[/* channels */5] = newChannels, newrecord$1)];
+	  return /* Some */[(newrecord$1[/* channels */6] = newChannels, newrecord$1)];
 	}
 
 	function mediaLoadProgressUpdated(param, channel, buffered, seekable) {
 	  var state = param[/* state */0];
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  var init = currentChannel[/* media */5];
 	  var media_000 = /* order */init[/* order */0];
 	  var media_001 = /* src */init[/* src */1];
@@ -9602,17 +9603,17 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$1 = state.slice();
-	  return /* Some */[(newrecord$1[/* channels */5] = newChannels, newrecord$1)];
+	  return /* Some */[(newrecord$1[/* channels */6] = newChannels, newrecord$1)];
 	}
 
 	function mediaScrubbedTo(param, channel, percent, time) {
 	  var state = param[/* state */0];
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  var newrecord = currentChannel.slice();
 	  newrecord[/* mediaScrubbedTo */9] = /* Some */[/* tuple */[
 	      percent,
@@ -9623,22 +9624,22 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$1 = state.slice();
-	  return /* Some */[(newrecord$1[/* channels */5] = newChannels, newrecord$1)];
+	  return /* Some */[(newrecord$1[/* channels */6] = newChannels, newrecord$1)];
 	}
 
 	function chatBoxFocused(param, focused) {
 	  var newrecord = param[/* state */0].slice();
-	  return /* Some */[(newrecord[/* userMessageFocused */6] = focused, newrecord)];
+	  return /* Some */[(newrecord[/* userMessageFocused */7] = focused, newrecord)];
 	}
 
 	function searchFormFocused(param, focused) {
 	  var newrecord = param[/* state */0].slice();
-	  return /* Some */[(newrecord[/* searchFormFocused */7] = focused, newrecord)];
+	  return /* Some */[(newrecord[/* searchFormFocused */8] = focused, newrecord)];
 	}
 
 	function userMenuToggled(param, opened) {
 	  var newrecord = param[/* state */0].slice();
-	  return /* Some */[(newrecord[/* userMenuOpen */8] = opened, newrecord)];
+	  return /* Some */[(newrecord[/* userMenuOpen */9] = opened, newrecord)];
 	}
 
 	function msgSubmitted(param, channel, msg) {
@@ -9671,7 +9672,7 @@
 	            Caml_builtin_exceptions.assert_failure,
 	            [
 	              "kandan.re",
-	              376,
+	              390,
 	              15
 	            ]
 	          ];
@@ -9679,10 +9680,10 @@
 	  }
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === channel[/* id */0]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var otherChannels = List.filter(function (haystack) {
 	          return +(haystack[/* id */0] !== channel[/* id */0]);
-	        })(state[/* channels */5]);
+	        })(state[/* channels */6]);
 	  var newrecord = currentChannel.slice();
 	  newrecord[/* activities */3] = List.append(currentChannel[/* activities */3], /* :: */[
 	        newMsg,
@@ -9697,7 +9698,7 @@
 	        /* [] */0
 	      ]);
 	  var newrecord$1 = state.slice();
-	  return /* Some */[(newrecord$1[/* channels */5] = newChannels, newrecord$1)];
+	  return /* Some */[(newrecord$1[/* channels */6] = newChannels, newrecord$1)];
 	}
 
 	function processEffects(param, action, _, newState) {
@@ -9719,22 +9720,22 @@
 	      case 4 : 
 	          var sortedChannels = List.sort(function (a, b) {
 	                return Caml_string.caml_string_compare(a[/* title */1], b[/* title */1]);
-	              }, newState[/* channels */5]);
+	              }, newState[/* channels */6]);
 	          var channel$1 = List.nth(sortedChannels, action[0]);
 	          setTimeout(function () {
 	                return scrollToLatestMessage(props[/* rootEl */1], channel$1[/* id */0]);
 	              }, 100);
 	          break;
-	      case 13 : 
+	      case 14 : 
 	          var channel$2 = action[0];
 	          setTimeout(function () {
 	                return scrollToLatestMessage(props[/* rootEl */1], channel$2[/* id */0]);
 	              }, 100);
 	          break;
-	      case 19 : 
+	      case 20 : 
 	          console.log(action[0]);
 	          break;
-	      case 20 : 
+	      case 21 : 
 	          window.alert(action[0]);
 	          break;
 	      default:
@@ -9773,54 +9774,58 @@
 	      case 4 : 
 	          var sortedChannels = List.sort(function (a, b) {
 	                return Caml_string.caml_string_compare(a[/* title */1], b[/* title */1]);
-	              }, componentBag[/* state */0][/* channels */5]);
+	              }, componentBag[/* state */0][/* channels */6]);
 	          newState = channelSelected(componentBag, List.nth(sortedChannels, action[0]));
 	          break;
 	      case 5 : 
-	          newState = songSelected(componentBag, action[0], action[1]);
+	          var newrecord = componentBag[/* state */0].slice();
+	          newState = /* Some */[(newrecord[/* asideChannelId */3] = action[0], newrecord)];
 	          break;
 	      case 6 : 
-	          newState = mediaStateUpdated(componentBag, action[0], action[1]);
+	          newState = songSelected(componentBag, action[0], action[1]);
 	          break;
 	      case 7 : 
-	          newState = mediaScrubbedTo(componentBag, action[0], action[1], action[2]);
+	          newState = mediaStateUpdated(componentBag, action[0], action[1]);
 	          break;
 	      case 8 : 
-	          newState = mediaPlaybackFinished(componentBag, action[0]);
+	          newState = mediaScrubbedTo(componentBag, action[0], action[1], action[2]);
 	          break;
 	      case 9 : 
-	          newState = mediaProgressUpdated(componentBag, action[0], action[1], action[2]);
+	          newState = mediaPlaybackFinished(componentBag, action[0]);
 	          break;
 	      case 10 : 
-	          newState = mediaLoadProgressUpdated(componentBag, action[0], action[1], action[2]);
+	          newState = mediaProgressUpdated(componentBag, action[0], action[1], action[2]);
 	          break;
 	      case 11 : 
-	          newState = chatBoxFocused(componentBag, action[0]);
+	          newState = mediaLoadProgressUpdated(componentBag, action[0], action[1], action[2]);
 	          break;
 	      case 12 : 
-	          newState = userMenuToggled(componentBag, action[0]);
+	          newState = chatBoxFocused(componentBag, action[0]);
 	          break;
 	      case 13 : 
-	          newState = msgSubmitted(componentBag, action[0], action[1]);
+	          newState = userMenuToggled(componentBag, action[0]);
 	          break;
 	      case 14 : 
-	          newState = volumeSet(componentBag, action[0]);
+	          newState = msgSubmitted(componentBag, action[0], action[1]);
 	          break;
 	      case 15 : 
-	          newState = volumeIncremented(componentBag, action[0]);
+	          newState = volumeSet(componentBag, action[0]);
 	          break;
 	      case 16 : 
-	          newState = volumeDecremented(componentBag, action[0]);
+	          newState = volumeIncremented(componentBag, action[0]);
 	          break;
 	      case 17 : 
-	          newState = uriNavigated(componentBag, action[0]);
+	          newState = volumeDecremented(componentBag, action[0]);
 	          break;
 	      case 18 : 
-	          var newrecord = componentBag[/* state */0].slice();
-	          newState = /* Some */[(newrecord[/* debug */13] = /* record */[/* botTalkEnabled */action[0]], newrecord)];
+	          newState = uriNavigated(componentBag, action[0]);
 	          break;
 	      case 19 : 
+	          var newrecord$1 = componentBag[/* state */0].slice();
+	          newState = /* Some */[(newrecord$1[/* debug */14] = /* record */[/* botTalkEnabled */action[0]], newrecord$1)];
+	          break;
 	      case 20 : 
+	      case 21 : 
 	          newState = /* None */0;
 	          break;
 	      
@@ -9851,8 +9856,8 @@
 	    }
 	  } else {
 	    switch (action.tag | 0) {
-	      case 15 : 
 	      case 16 : 
+	      case 17 : 
 	          exit = 1;
 	          break;
 	      default:
@@ -9888,21 +9893,21 @@
 	          Caml_builtin_exceptions.assert_failure,
 	          [
 	            "kandan.re",
-	            533,
+	            549,
 	            16
 	          ]
 	        ];
 	  }
 	  var sortedChannels = List.sort(function (a, b) {
 	        return Caml_string.caml_string_compare(a[/* title */1], b[/* title */1]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var currentChannel = List.find(function (channel) {
 	        return +(channel[/* id */0] === state[/* selectedChannelId */2]);
-	      }, state[/* channels */5]);
+	      }, state[/* channels */6]);
 	  var activities = List.sort(function (a, b) {
 	        return Caml_float.caml_float_compare(a[/* createdAt */2], b[/* createdAt */2]);
 	      }, currentChannel[/* activities */3]);
-	  var match$1 = state[/* search */9];
+	  var match$1 = state[/* search */10];
 	  var filteredActivities;
 	  if (match$1) {
 	    var term = match$1[0];
@@ -9917,7 +9922,7 @@
 	  } else {
 	    filteredActivities = activities;
 	  }
-	  var match$2 = state[/* search */9];
+	  var match$2 = state[/* search */10];
 	  var filteredChannels;
 	  if (match$2) {
 	    var term$1 = match$2[0];
@@ -9932,7 +9937,7 @@
 	  } else {
 	    filteredChannels = sortedChannels;
 	  }
-	  var match$3 = state[/* search */9];
+	  var match$3 = state[/* search */10];
 	  var filteredPlaylist;
 	  if (match$3) {
 	    var term$2 = match$3[0];
@@ -9954,23 +9959,23 @@
 	  }
 	  var $js;
 	  try {
-	    $js = /* SongSelected */Block.__(5, [
+	    $js = /* SongSelected */Block.__(6, [
 	        currentChannel,
 	        Utils.findNextMedia(currentChannel, -1)
 	      ]);
 	  }
 	  catch (exn){
-	    $js = /* Log */Block.__(19, ["No previous media in channel"]);
+	    $js = /* Log */Block.__(20, ["No previous media in channel"]);
 	  }
 	  var $js$1;
 	  try {
-	    $js$1 = /* SongSelected */Block.__(5, [
+	    $js$1 = /* SongSelected */Block.__(6, [
 	        currentChannel,
 	        Utils.findNextMedia(currentChannel, 1)
 	      ]);
 	  }
 	  catch (exn$1){
-	    $js$1 = /* Log */Block.__(19, ["No previous media in channel"]);
+	    $js$1 = /* Log */Block.__(20, ["No previous media in channel"]);
 	  }
 	  var match$4 = currentChannel[/* mediaState */6];
 	  var $js$2;
@@ -9991,7 +9996,7 @@
 	      "ctrl+esc",
 	      /* [] */0
 	    ],
-	    /* Log */Block.__(19, ["ctrl esc yo!"])
+	    /* Log */Block.__(20, ["ctrl esc yo!"])
 	  ];
 	  var keyMap_001 = /* :: */[
 	    /* tuple */[
@@ -9999,7 +10004,7 @@
 	        "ctrl+shift+esc",
 	        /* [] */0
 	      ],
-	      /* Alert */Block.__(20, ["ctrl shift esc yo!"])
+	      /* Alert */Block.__(21, ["ctrl shift esc yo!"])
 	    ],
 	    /* :: */[
 	      /* tuple */[
@@ -10034,7 +10039,7 @@
 	            ]
 	          ]
 	        ],
-	        /* Alert */Block.__(20, ["Konami code!"])
+	        /* Alert */Block.__(21, ["Konami code!"])
 	      ],
 	      /* :: */[
 	        /* tuple */[
@@ -10042,7 +10047,7 @@
 	            "ctrl+b",
 	            /* [] */0
 	          ],
-	          /* BotTalkToggled */Block.__(18, [1 - state[/* debug */13][/* botTalkEnabled */0]])
+	          /* BotTalkToggled */Block.__(19, [1 - state[/* debug */14][/* botTalkEnabled */0]])
 	        ],
 	        /* :: */[
 	          /* tuple */[
@@ -10050,7 +10055,7 @@
 	              "ctrl+n",
 	              /* [] */0
 	            ],
-	            generateMsgSubmittedAction(state[/* channels */5], state[/* users */4])
+	            generateMsgSubmittedAction(state[/* channels */6], state[/* users */5])
 	          ],
 	          /* :: */[
 	            /* tuple */[
@@ -10058,7 +10063,7 @@
 	                "ctrl+-",
 	                /* [] */0
 	              ],
-	              /* VolumeDecremented */Block.__(16, [0.1])
+	              /* VolumeDecremented */Block.__(17, [0.1])
 	            ],
 	            /* :: */[
 	              /* tuple */[
@@ -10066,7 +10071,7 @@
 	                  "ctrl+shift+_",
 	                  /* [] */0
 	                ],
-	                /* VolumeDecremented */Block.__(16, [0.1])
+	                /* VolumeDecremented */Block.__(17, [0.1])
 	              ],
 	              /* :: */[
 	                /* tuple */[
@@ -10074,7 +10079,7 @@
 	                    "ctrl+shift+plus",
 	                    /* [] */0
 	                  ],
-	                  /* VolumeIncremented */Block.__(15, [0.1])
+	                  /* VolumeIncremented */Block.__(16, [0.1])
 	                ],
 	                /* :: */[
 	                  /* tuple */[
@@ -10082,7 +10087,7 @@
 	                      "ctrl+equal",
 	                      /* [] */0
 	                    ],
-	                    /* VolumeIncremented */Block.__(15, [0.1])
+	                    /* VolumeIncremented */Block.__(16, [0.1])
 	                  ],
 	                  /* :: */[
 	                    /* tuple */[
@@ -10130,7 +10135,7 @@
 	                                  "ctrl+p",
 	                                  /* [] */0
 	                                ],
-	                                /* MediaStateUpdated */Block.__(6, [
+	                                /* MediaStateUpdated */Block.__(7, [
 	                                    currentChannel,
 	                                    $js$2
 	                                  ])
@@ -10328,7 +10333,7 @@
 	                                                                            "ctrl+?",
 	                                                                            /* [] */0
 	                                                                          ],
-	                                                                          /* UserMenuToggled */Block.__(12, [state[/* userMenuOpen */8]])
+	                                                                          /* UserMenuToggled */Block.__(13, [state[/* userMenuOpen */9]])
 	                                                                        ],
 	                                                                        /* [] */0
 	                                                                      ]
@@ -10377,10 +10382,10 @@
 	  };
 	  var audioChannels = $$Array.of_list(List.map(function (channel) {
 	            var match = +(channel[/* id */0] === currentChannel[/* id */0]);
-	            return Curry._4(Audio_player.createElement(channel, channel[/* id */0], match !== 0 ? state[/* volume */11] : 0.0, channel[/* mediaState */6], function (el) {
+	            return Curry._4(Audio_player.createElement(channel, channel[/* id */0], match !== 0 ? state[/* volume */12] : 0.0, channel[/* mediaState */6], function (el) {
 	                            var duration = el.duration;
 	                            var currentTime = el.currentTime;
-	                            var partial_arg = /* MediaProgressUpdated */Block.__(9, [
+	                            var partial_arg = /* MediaProgressUpdated */Block.__(10, [
 	                                channel,
 	                                currentTime,
 	                                duration
@@ -10391,7 +10396,7 @@
 	                          }, channel[/* mediaScrubbedTo */9], /* None */0, /* None */0, /* Some */[function (_, buffered, seekable) {
 	                              var nativeBuffered = nativeOfTimeRanges(buffered);
 	                              var nativeSeekable = nativeOfTimeRanges(seekable);
-	                              var partial_arg = /* MediaLoadProgressUpdated */Block.__(10, [
+	                              var partial_arg = /* MediaLoadProgressUpdated */Block.__(11, [
 	                                  channel,
 	                                  nativeBuffered,
 	                                  nativeSeekable
@@ -10421,29 +10426,11 @@
 	                    src: Utils.gravatarUrl(/* None */0, /* None */0, user[/* email */1])
 	                  }), React.createElement("span", undefined, Utils.nameOfUser(user)));
 	  };
-	  var channelEntry = function (channel) {
-	    var channelUsers = List.sort(function (a, b) {
-	          return Caml_string.caml_string_compare($$String.lowercase(Utils.nameOfUser(a)), $$String.lowercase(Utils.nameOfUser(b)));
-	        }, List.filter(function (user) {
-	                return Curry._2(State.UserIdSet[/* mem */2], user[/* id */0], channel[/* userIds */4]);
-	              })(state[/* users */4]));
-	    return React.createElement("div", {
-	                className: "menu-item",
-	                onClick: function () {
-	                  var partial_arg = /* ChannelSelected */Block.__(3, [channel]);
-	                  return Curry._2(updater, function (param, param$1) {
-	                              return dispatchEventless(partial_arg, param, param$1);
-	                            }, /* () */0);
-	                }
-	              }, channel[/* title */1], React.createElement("ul", {
-	                    className: "channel-users-list"
-	                  }, ReactRe.listToElement(List.map(userEntry, channelUsers))));
-	  };
 	  var songEntry = function (media) {
 	    return React.createElement("li", {
 	                className: "menu-item",
 	                onClick: function () {
-	                  var partial_arg = /* SongSelected */Block.__(5, [
+	                  var partial_arg = /* SongSelected */Block.__(6, [
 	                      currentChannel,
 	                      media
 	                    ]);
@@ -10459,9 +10446,11 @@
 	                    className: "menu-text"
 	                  }, Utils.mediaSrcToTitle(media)));
 	  };
-	  var match$5 = currentChannel[/* mediaState */6];
+	  var partial_arg = state[/* asideChannelId */3];
+	  var match$5 = state[/* asideChannelId */3];
+	  var match$6 = currentChannel[/* mediaState */6];
 	  var $js$3;
-	  switch (match$5) {
+	  switch (match$6) {
 	    case 0 : 
 	        $js$3 = " || ";
 	        break;
@@ -10472,20 +10461,21 @@
 	    
 	  }
 	  var seconds = currentChannel[/* mediaProgress */7] % 60 | 0;
-	  var match$6 = +(seconds < 10);
-	  var match$7 = currentChannel[/* media */5][/* buffered */3];
-	  var match$8 = currentChannel[/* media */5][/* duration */2];
+	  var match$7 = +(seconds < 10);
+	  var match$8 = currentChannel[/* media */5][/* buffered */3];
+	  var match$9 = currentChannel[/* media */5][/* duration */2];
 	  var $js$4;
-	  if (match$8) {
-	    var duration = match$8[0];
+	  if (match$9) {
+	    var duration = match$9[0];
 	    var seconds$1 = duration % 60 | 0;
-	    var match$9 = +(seconds$1 < 10);
+	    var match$10 = +(seconds$1 < 10);
 	    $js$4 = Pervasives.string_of_int(duration / 60 | 0) + (":" + ((
-	          match$9 !== 0 ? "0" : ""
+	          match$10 !== 0 ? "0" : ""
 	        ) + Pervasives.string_of_int(seconds$1)));
 	  } else {
 	    $js$4 = "Not Loaded";
 	  }
+	  var v = state[/* volume */12];
 	  return React.createElement("div", {
 	              className: "container"
 	            }, Curry._4(Page_title.createElement(pageTitleOfChannel(currentChannel), /* None */0), /* [] */0, /* None */0, /* None */0, /* () */0), Curry._4(Routes.createElement(Routes.stateToPath(state), /* true */1, function (_, _$1, newUrl) {
@@ -10496,7 +10486,7 @@
 	                                  if (match !== 0) {
 	                                    return /* None */0;
 	                                  } else {
-	                                    return dispatchEventless(/* UriNavigated */Block.__(17, [currentActualPath]), latestComponentBag, /* () */0);
+	                                    return dispatchEventless(/* UriNavigated */Block.__(18, [currentActualPath]), latestComponentBag, /* () */0);
 	                                  }
 	                                }, /* () */0);
 	                    }), /* [] */0, /* None */0, /* None */0, /* () */0), audioChannels, Curry._4(Key_queue.createElement(keyMap, dispatchEL, /* None */0, /* None */0), /* [] */0, /* None */0, /* None */0, /* () */0), React.createElement("div", {
@@ -10505,28 +10495,80 @@
 	                      className: "menu left"
 	                    }, React.createElement("div", {
 	                          className: "menu-items channels"
-	                        }, searchField(state[/* search */9], function (term) {
+	                        }, searchField(state[/* search */10], function (term) {
 	                              var partial_arg = /* SearchUpdated */Block.__(2, [term]);
 	                              return Curry._2(updater, function (param, param$1) {
 	                                          return dispatchEventless(partial_arg, param, param$1);
 	                                        }, /* () */0);
-	                            }), ReactRe.listToElement(List.map(channelEntry, filteredChannels)))), React.createElement("div", {
+	                            }), ReactRe.listToElement(List.map(function (param) {
+	                                  var spotlightChannelId = partial_arg;
+	                                  var channel = param;
+	                                  var channelUsers = List.sort(function (a, b) {
+	                                        return Caml_string.caml_string_compare($$String.lowercase(Utils.nameOfUser(a)), $$String.lowercase(Utils.nameOfUser(b)));
+	                                      }, List.filter(function (user) {
+	                                              return Curry._2(State.UserIdSet[/* mem */2], user[/* id */0], channel[/* userIds */4]);
+	                                            })(state[/* users */5]));
+	                                  var match = state[/* search */10];
+	                                  var filteredUsers;
+	                                  if (match) {
+	                                    var term = match[0];
+	                                    filteredUsers = List.filter(function (user) {
+	                                            var match = Utils.nameOfUser(user).toLowerCase().indexOf(term.toLowerCase());
+	                                            if (match !== -1) {
+	                                              return /* true */1;
+	                                            } else {
+	                                              return /* false */0;
+	                                            }
+	                                          })(channelUsers);
+	                                  } else {
+	                                    filteredUsers = channelUsers;
+	                                  }
+	                                  var userEntries = spotlightChannelId ? React.createElement("ul", {
+	                                          className: "channel-users-list"
+	                                        }, ReactRe.listToElement(List.map(userEntry, filteredUsers))) : null;
+	                                  var channelEntry = React.createElement("div", {
+	                                        className: "menu-item",
+	                                        onClick: function () {
+	                                          var partial_arg = /* ChannelSelected */Block.__(3, [channel]);
+	                                          return Curry._2(updater, function (param, param$1) {
+	                                                      return dispatchEventless(partial_arg, param, param$1);
+	                                                    }, /* () */0);
+	                                        }
+	                                      }, channel[/* title */1], userEntries);
+	                                  if (spotlightChannelId) {
+	                                    var match$1 = +(spotlightChannelId[0] === channel[/* id */0]);
+	                                    if (match$1 !== 0) {
+	                                      return channelEntry;
+	                                    } else {
+	                                      return null;
+	                                    }
+	                                  } else {
+	                                    return channelEntry;
+	                                  }
+	                                }, match$5 ? sortedChannels : filteredChannels)), React.createElement("button", {
+	                              onClick: function () {
+	                                var partial_arg = /* ChannelFocused */Block.__(5, [/* None */0]);
+	                                return Curry._2(updater, function (param, param$1) {
+	                                            return dispatchEventless(partial_arg, param, param$1);
+	                                          }, /* () */0);
+	                              }
+	                            }, "Back"))), React.createElement("div", {
 	                      className: "chat"
 	                    }, React.createElement("div", {
 	                          className: "chat-feed"
 	                        }, ReactRe.listToElement(List.map(function (activity) {
 	                                  var user = List.find(function (user) {
 	                                        return +(user[/* id */0] === activity[/* userId */1]);
-	                                      }, state[/* users */4]);
-	                                  var match = Plugins.renderableOfMessage(me, state[/* users */4], currentChannel, activity);
+	                                      }, state[/* users */5]);
+	                                  var match = Plugins.renderableOfMessage(me, state[/* users */5], currentChannel, activity);
 	                                  return React.createElement("div", undefined, React.createElement("img", {
 	                                                  className: "avatar",
 	                                                  src: Utils.gravatarUrl(/* None */0, /* None */0, user[/* email */1])
 	                                                }), match[0], React.createElement("div", {
 	                                                  className: "media-container"
 	                                                }, match[1]));
-	                                }, filteredActivities))), Curry._4(Chatbox.createElement(currentChannel, state[/* users */4], function (channel, msg) {
-	                              var partial_arg = /* MsgSubmitted */Block.__(13, [
+	                                }, filteredActivities))), Curry._4(Chatbox.createElement(currentChannel, state[/* users */5], function (channel, msg) {
+	                              var partial_arg = /* MsgSubmitted */Block.__(14, [
 	                                  channel,
 	                                  msg
 	                                ]);
@@ -10534,7 +10576,7 @@
 	                                          return dispatchEventless(partial_arg, param, param$1);
 	                                        }, /* () */0);
 	                            }, me, function (focused) {
-	                              var partial_arg = /* ChatBoxFocused */Block.__(11, [focused]);
+	                              var partial_arg = /* ChatBoxFocused */Block.__(12, [focused]);
 	                              return Curry._2(updater, function (param, param$1) {
 	                                          return dispatchEventless(partial_arg, param, param$1);
 	                                        }, /* () */0);
@@ -10549,7 +10591,7 @@
 	                    }, React.createElement("span", {
 	                          onClick: function () {
 	                            var action_001 = Utils.findNextMedia(currentChannel, -1);
-	                            var action = /* SongSelected */Block.__(5, [
+	                            var action = /* SongSelected */Block.__(6, [
 	                                currentChannel,
 	                                action_001
 	                              ]);
@@ -10573,7 +10615,7 @@
 	                                  break;
 	                              
 	                            }
-	                            var partial_arg = /* MediaStateUpdated */Block.__(6, [
+	                            var partial_arg = /* MediaStateUpdated */Block.__(7, [
 	                                currentChannel,
 	                                newState
 	                              ]);
@@ -10584,7 +10626,7 @@
 	                        }, $js$3), React.createElement("span", {
 	                          onClick: function () {
 	                            var action_001 = Utils.findNextMedia(currentChannel, 1);
-	                            var action = /* SongSelected */Block.__(5, [
+	                            var action = /* SongSelected */Block.__(6, [
 	                                currentChannel,
 	                                action_001
 	                              ]);
@@ -10608,7 +10650,7 @@
 	                            }, React.createElement("div", {
 	                                  className: "elapsed"
 	                                }, Pervasives.string_of_int(currentChannel[/* mediaProgress */7] / 60 | 0) + (":" + ((
-	                                      match$6 !== 0 ? "0" : ""
+	                                      match$7 !== 0 ? "0" : ""
 	                                    ) + Pervasives.string_of_int(seconds)))), React.createElement("div", {
 	                                  className: "timeline slider"
 	                                }, Curry._4(Progress_bar.createElement(/* tuple */[
@@ -10616,7 +10658,7 @@
 	                                          Utils.channelMediaProgress(currentChannel, currentChannel[/* media */5])
 	                                        ], /* Some */[function (offset) {
 	                                            var action_002 = Date.now();
-	                                            var action = /* MediaPlayerScrubbed */Block.__(7, [
+	                                            var action = /* MediaPlayerScrubbed */Block.__(8, [
 	                                                currentChannel,
 	                                                offset,
 	                                                action_002
@@ -10624,7 +10666,7 @@
 	                                            return Curry._1(Curry._1(updater, function (param, param$1) {
 	                                                            return dispatchEventless(action, param, param$1);
 	                                                          }), /* () */0);
-	                                          }], /* Some */["ew-resize"], match$7 ? /* Some */[$$Array.map(function (param) {
+	                                          }], /* Some */["ew-resize"], match$8 ? /* Some */[$$Array.map(function (param) {
 	                                                  var startPercent = Utils.tmpProgress(param[0], currentChannel[/* media */5]);
 	                                                  var endPercent = Utils.tmpProgress(param[1], currentChannel[/* media */5]);
 	                                                  var widthPercent = endPercent - startPercent;
@@ -10632,7 +10674,7 @@
 	                                                          startPercent,
 	                                                          widthPercent
 	                                                        ];
-	                                                }, match$7[0])] : /* None */0), /* [] */0, /* None */0, /* None */0, /* () */0), React.createElement("div", {
+	                                                }, match$8[0])] : /* None */0), /* [] */0, /* None */0, /* None */0, /* () */0), React.createElement("div", {
 	                                      className: "thumb"
 	                                    })), React.createElement("div", {
 	                                  className: "playtime"
@@ -10645,13 +10687,17 @@
 	                                        return dispatchEventless(/* VolumeMuteToggled */0, param, param$1);
 	                                      }, /* () */0);
 	                          }
-	                        }, "<))"), React.createElement("div", {
+	                        }, Curry._4(Icon.createElement(v < 0.1 ? "sound-off" : (
+	                                    v < 0.11 ? "sound-min" : (
+	                                        v < 0.51 ? "sound-med" : "sound-max"
+	                                      )
+	                                  )), /* [] */0, /* None */0, /* None */0, /* () */0)), React.createElement("div", {
 	                          className: "volume slider"
 	                        }, Curry._4(Progress_bar.createElement(/* tuple */[
 	                                  0.0,
-	                                  state[/* volume */11] * 100.0
+	                                  state[/* volume */12] * 100.0
 	                                ], /* Some */[function (offset) {
-	                                    var partial_arg = /* VolumeSet */Block.__(14, [offset]);
+	                                    var partial_arg = /* VolumeSet */Block.__(15, [offset]);
 	                                    return Curry._2(updater, function (param, param$1) {
 	                                                return dispatchEventless(partial_arg, param, param$1);
 	                                              }, /* () */0);
@@ -10665,9 +10711,9 @@
 	  var state = param[/* state */0];
 	  setInterval(function () {
 	        return Curry._2(updater, function (latestComponentBag, _) {
-	                    var match = latestComponentBag[/* state */0][/* debug */13][/* botTalkEnabled */0];
+	                    var match = latestComponentBag[/* state */0][/* debug */14][/* botTalkEnabled */0];
 	                    if (match !== 0) {
-	                      var action = generateMsgSubmittedAction(latestComponentBag[/* state */0][/* channels */5], latestComponentBag[/* state */0][/* users */4]);
+	                      var action = generateMsgSubmittedAction(latestComponentBag[/* state */0][/* channels */6], latestComponentBag[/* state */0][/* users */5]);
 	                      return dispatchEventless(action, latestComponentBag, /* () */0);
 	                    } else {
 	                      return /* None */0;
@@ -10675,7 +10721,7 @@
 	                  }, /* () */0);
 	      }, 1000);
 	  var path = Routes.pagePath(window);
-	  var match = channelFromUri(state[/* channels */5], path);
+	  var match = channelFromUri(state[/* channels */6], path);
 	  if (match) {
 	    var newrecord = state.slice();
 	    return /* Some */[(newrecord[/* selectedChannelId */2] = match[0][/* id */0], newrecord)];
@@ -15313,9 +15359,9 @@
 	  ]
 	];
 
-	var state_003 = /* userId : Some */[1];
+	var state_004 = /* userId : Some */[1];
 
-	var state_004 = /* users : :: */[
+	var state_005 = /* users : :: */[
 	  /* record */[
 	    /* id */1,
 	    /* email */"sean@bushi.do",
@@ -15371,7 +15417,7 @@
 	  ]
 	];
 
-	var state_005 = /* channels : :: */[
+	var state_006 = /* channels : :: */[
 	  /* record */[
 	    /* id */0,
 	    /* title */"Classical",
@@ -15590,15 +15636,16 @@
 	  ]
 	];
 
-	var state_013 = /* debug : record */[/* botTalkEnabled : false */0];
+	var state_014 = /* debug : record */[/* botTalkEnabled : false */0];
 
 	var state = /* record */[
 	  /* rightSidebarOpen : false */0,
 	  /* leftSidebarOpen : false */0,
 	  /* selectedChannelId */2,
-	  state_003,
+	  /* asideChannelId : None */0,
 	  state_004,
 	  state_005,
+	  state_006,
 	  /* userMessageFocused : false */0,
 	  /* searchFormFocused : false */0,
 	  /* userMenuOpen : false */0,
@@ -15606,7 +15653,7 @@
 	  /* title */"Kandan",
 	  /* volume */0.75,
 	  /* lastVolume */0.75,
-	  state_013
+	  state_014
 	];
 
 	var messageBodies = /* array */[
@@ -15837,36 +15884,38 @@
 	      case 4 : 
 	          return "ChannelSelectedByIndex";
 	      case 5 : 
-	          return "SongSelected";
+	          return "ChannelFocused";
 	      case 6 : 
-	          return "MediaStateUpdated";
+	          return "SongSelected";
 	      case 7 : 
-	          return "MediaPlayerScrubbed";
+	          return "MediaStateUpdated";
 	      case 8 : 
-	          return "MediaPlaybackFinished";
+	          return "MediaPlayerScrubbed";
 	      case 9 : 
-	          return "MediaProgressUpdated on " + action[0][/* title */1];
+	          return "MediaPlaybackFinished";
 	      case 10 : 
-	          return "MediaLoadProgressUpdated on " + action[0][/* title */1];
+	          return "MediaProgressUpdated on " + action[0][/* title */1];
 	      case 11 : 
-	          return "ChatBoxFocused";
+	          return "MediaLoadProgressUpdated on " + action[0][/* title */1];
 	      case 12 : 
-	          return "UserMenuToggled";
+	          return "ChatBoxFocused";
 	      case 13 : 
-	          return "MsgSubmitted";
+	          return "UserMenuToggled";
 	      case 14 : 
-	          return "VolumeSet";
+	          return "MsgSubmitted";
 	      case 15 : 
-	          return "VolumentIncremented";
+	          return "VolumeSet";
 	      case 16 : 
-	          return "VolumentDecremented";
+	          return "VolumentIncremented";
 	      case 17 : 
-	          return "UriNavigated";
+	          return "VolumentDecremented";
 	      case 18 : 
-	          return "BotTalkToggled";
+	          return "UriNavigated";
 	      case 19 : 
-	          return "Log";
+	          return "BotTalkToggled";
 	      case 20 : 
+	          return "Log";
+	      case 21 : 
 	          return "Alert";
 	      
 	    }
@@ -42340,7 +42389,7 @@
 	function stateToPath(appState) {
 	  var currentChannel = List.find(function (haystack) {
 	        return +(haystack[/* id */0] === appState[/* selectedChannelId */2]);
-	      }, appState[/* channels */5]);
+	      }, appState[/* channels */6]);
 	  return encodeURI(currentChannel[/* title */1]);
 	}
 
@@ -42544,6 +42593,523 @@
 	exports.wrapProps     = wrapProps;
 	exports.createElement = createElement;
 	/* include Not a pure module */
+
+
+/***/ },
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// Generated by BUCKLESCRIPT VERSION 1.6.0+dev, PLEASE EDIT WITH CARE
+	'use strict';
+
+	var $$Array      = __webpack_require__(24);
+	var Curry        = __webpack_require__(1);
+	var Paths        = __webpack_require__(241);
+	var React        = __webpack_require__(41);
+	var ReactRe      = __webpack_require__(71);
+	var Pervasives   = __webpack_require__(8);
+	var Js_primitive = __webpack_require__(35);
+
+	var componentDidMount = ReactRe.Component[0];
+
+	var componentWillUpdate = ReactRe.Component[1];
+
+	var componentDidUpdate = ReactRe.Component[2];
+
+	var componentWillReceiveProps = ReactRe.Component[3];
+
+	var componentWillUnmount = ReactRe.Component[4];
+
+	var getInstanceVars = ReactRe.Component[5];
+
+	var jsPropsToReasonProps = ReactRe.Component[6];
+
+	var getInitialState = ReactRe.Component[7];
+
+	var name = "Icon";
+
+	function render(param) {
+	  var props = param[/* props */1];
+	  var match = +(props[/* name */0] === "loading");
+	  var scale = match !== 0 ? "" : "non-scaling-stroke";
+	  var match$1 = Paths.iconPiles[props[/* name */0]];
+	  if (Js_primitive.is_nil_undef(match$1)) {
+	    return null;
+	  } else {
+	    return React.createElement("i", {
+	                className: "icon icon-" + props[/* name */0]
+	              }, React.createElement("svg", {
+	                    className: "iconpile",
+	                    viewBox: "0 0 24 24"
+	                  }, $$Array.mapi(function (index, pathName) {
+	                        var match = Paths.iconPaths[pathName];
+	                        return React.createElement("path", {
+	                                    key: Pervasives.string_of_int(index),
+	                                    className: pathName,
+	                                    d: Js_primitive.is_nil_undef(match) ? "" : match,
+	                                    vectorEffect: scale
+	                                  });
+	                      }, match$1)));
+	  }
+	}
+
+	var Icon_008 = /* Stateful */ReactRe.Component[8];
+
+	var Icon_009 = /* JsProps */ReactRe.Component[9];
+
+	var Icon_010 = /* InstanceVars */ReactRe.Component[10];
+
+	var Icon = /* module */[
+	  /* componentDidMount */componentDidMount,
+	  /* componentWillUpdate */componentWillUpdate,
+	  /* componentDidUpdate */componentDidUpdate,
+	  /* componentWillReceiveProps */componentWillReceiveProps,
+	  /* componentWillUnmount */componentWillUnmount,
+	  /* getInstanceVars */getInstanceVars,
+	  /* jsPropsToReasonProps */jsPropsToReasonProps,
+	  /* getInitialState */getInitialState,
+	  Icon_008,
+	  Icon_009,
+	  Icon_010,
+	  /* name */name,
+	  /* render */render
+	];
+
+	var include = ReactRe.CreateComponent([
+	      name,
+	      getInstanceVars,
+	      getInitialState,
+	      componentDidMount,
+	      componentWillReceiveProps,
+	      componentWillUpdate,
+	      componentDidUpdate,
+	      componentWillUnmount,
+	      jsPropsToReasonProps,
+	      render
+	    ]);
+
+	var wrapProps = include[1];
+
+	function createElement(name) {
+	  return Curry._1(wrapProps, /* record */[/* name */name]);
+	}
+
+	var comp = include[0];
+
+	exports.Icon          = Icon;
+	exports.comp          = comp;
+	exports.wrapProps     = wrapProps;
+	exports.createElement = createElement;
+	/* include Not a pure module */
+
+
+/***/ },
+/* 241 */
+/***/ function(module, exports) {
+
+	// Generated by BUCKLESCRIPT VERSION 1.6.0+dev, PLEASE EDIT WITH CARE
+	'use strict';
+
+
+	var iconPaths = {
+	  "stroke-search-lens": "M17,9.5c0,4.1-3.4,7.5-7.5,7.5S2,13.6,2,9.5S5.4,2,9.5,2S17,5.4,17,9.5z",
+	  "stroke-search-handle": "M14.9,14.9L22,22",
+	  "stroke-x-left": "M2,2l20,20",
+	  "stroke-x-right": "M2,22L22,2",
+	  "stroke-dropdown-caret": "M2,8h20L12,18L2,8z",
+	  "stroke-circle": "M22,12c0,5.5-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2S22,6.5,22,12z",
+	  "stroke-download": "M22,19.8V22H2v-2.2 M12,2v15.6 M18.7,10.9L12,17.6l-6.7-6.7",
+	  "stroke-globe": "M22,12c0,5.5-4.5,10-10,10S2,17.5,2,12S6.5,2,12,2S22,6.5,22,12z M4.6,5.3C6.4,6.4,9,7,12,7 s5.6-0.6,7.4-1.7 M19.4,18.7C17.6,17.6,15,17,12,17s-5.6,0.6-7.4,1.7 M12,2C9.2,2,7,6.5,7,12s2.2,10,5,10s5-4.5,5-10S14.8,2,12,2z M2,12h20 M12,22V2",
+	  "stroke-close": "M2,2l20,20 M22,2L2,22",
+	  "stroke-time": "M13,7v6H7",
+	  "stroke-spin": "M21,20.7h-4v-4 M17,20.7c3-1.7,5-5,5-8.7c0-5.5-4.5-10-10-10S2,6.5,2,12c0,5.5,4.5,10,10,10 c0,0,0,0,0,0",
+	  "stroke-commit": "M14.8,9.2c1.6,1.6,1.6,4.1,0,5.7s-4.1,1.6-5.7,0s-1.6-4.1,0-5.7S13.3,7.6,14.8,9.2z M9.2,14.8 L2,22 M14.8,9.2L22,2",
+	  "stroke-cog": "M22,12.9c-0.1,0.5-0.4,0.8-0.9,0.9c-0.6,0.1-1.7,0.2-1.7,0.2c-0.5,0.1-0.9,0.6-0.9,1.1c0,0.2,0.1,0.4,0.2,0.6 c0,0,0.7,0.9,1,1.4c0.3,0.4,0.3,0.9,0,1.2c-0.4,0.5-0.8,1-1.4,1.4c-0.2,0.2-0.4,0.2-0.6,0.2c-0.2,0-0.4-0.1-0.6-0.2l-1.4-1 c-0.2-0.1-0.4-0.2-0.6-0.2c-0.5,0-1,0.4-1.1,0.9l-0.2,1.7c-0.1,0.5-0.4,0.8-0.9,0.9c-0.3,0-0.7,0-1,0s-0.6,0-1,0 c-0.5-0.1-0.8-0.4-0.9-0.9c0,0-0.2-1.6-0.2-1.7c-0.1-0.5-0.5-0.9-1.1-0.9c-0.2,0-0.5,0.1-0.7,0.2l-1.3,1c-0.2,0.2-0.4,0.2-0.6,0.2 c-0.2,0-0.4-0.1-0.6-0.2c-0.5-0.4-1-0.8-1.4-1.4C4,18,4,17.5,4.3,17.1l1-1.3c0.2-0.2,0.2-0.4,0.2-0.7c0-0.6-0.4-1-1-1.1l-1.6-0.2 c-0.5-0.1-0.8-0.4-0.9-0.9C2,12.3,2,11.7,2.1,11c0-0.5,0.4-0.8,0.9-0.9L4.5,10c0.5-0.1,1-0.5,1-1.1c0-0.2-0.1-0.5-0.2-0.6 c0,0-0.7-0.9-1-1.3C4,6.5,4,6,4.3,5.7c0.4-0.5,0.8-1,1.4-1.4C6,4,6.5,4,6.9,4.3l1.3,1c0.2,0.1,0.4,0.2,0.7,0.2c0.5,0,1-0.4,1.1-0.9 l0.2-1.7c0.1-0.5,0.4-0.8,0.9-0.9c0.6-0.1,1.3-0.1,1.9,0c0.5,0.1,0.8,0.4,0.9,0.9L14,4.6c0.1,0.5,0.5,0.9,1.1,0.9 c0.2,0,0.4-0.1,0.6-0.2c0,0,0.9-0.7,1.4-1C17.5,4,18,4,18.3,4.3c0.5,0.4,1,0.8,1.4,1.4C20,6,20,6.5,19.7,6.9c0,0-1,1.4-1,1.4 c-0.1,0.2-0.2,0.4-0.2,0.6c0,0.5,0.4,1,0.9,1.1c0,0,1.2,0.2,1.7,0.2c0.5,0.1,0.8,0.4,0.9,0.9C22,11.6,22,12.3,22,12.9z",
+	  "stroke-dot": "M14,12c0,1.1-0.9,2-2,2s-2-0.9-2-2s0.9-2,2-2S14,10.9,14,12z",
+	  "stroke-eye": "M12,5.3C7.5,5.3,3.6,8,2,12c1.6,4,5.5,6.7,10,6.7S20.4,16,22,12C20.4,8,16.5,5.3,12,5.3z",
+	  "stroke-star": "M12,2.5l3.1,6.3l6.9,1l-5,4.9l1.2,6.9L12,18.3l-6.2,3.2L7,14.6L2,9.8l6.9-1L12,2.5z",
+	  "stroke-user": "M17.6,7.6c0,3.1-2.5,5.6-5.6,5.6s-5.6-2.5-5.6-5.6S8.9,2,12,2S17.6,4.5,17.6,7.6z M6.2,11.9 c-1.9,1.6-3.1,4-3.1,6.8c0,1.8,4,3.3,8.9,3.3s8.9-1.5,8.9-3.3c0-2.7-1.2-5.1-3.1-6.8",
+	  "stroke-code-left": "M9.4,21.7l5.2-19.3",
+	  "stroke-code-slash": "M8,18l-6-6l6-6",
+	  "stroke-code-right": "M16,6l6,6l-6,6",
+	  "stroke-nodejs": "M8.9,8.1v8.4c0,1.5-0.8,2.3-2.2,2.3c-0.4,0-0.8,0-1.7-0.5l-1.2-0.7c-0.5-0.3-0.8-0.8-0.8-1.3 V7.8c0-0.5,0.3-1.1,0.8-1.3l7.3-4.2c0.5-0.3,1.1-0.3,1.5,0l7.3,4.2c0.5,0.3,0.8,0.8,0.8,1.3v8.5c0,0.6-0.3,1.1-0.8,1.3l-7.3,4.2 C12.5,21.9,12.3,22,12,22c-0.3,0-0.5-0.1-0.8-0.2l-2.4-1.4 M11.1,13.3c0,1.4,1,2.3,2.9,2.3c2.4,0,3.2-0.7,3.2-1.8 c0-1-1.2-1.7-2.9-1.7c-1.6,0-2.9-0.4-2.9-1.6c0-1,0.6-1.7,2.6-1.7c2.7,0,3,1.3,3,2.1",
+	  "stroke-python-north": "M12,7.1H7.2 M16.8,7.1V4.7c0-1.3-1.1-2.3-2.4-2.5C13.5,2.1,12.7,2,11.9,2 c-0.8,0-1.6,0.1-2.3,0.2c-2,0.4-2.4,1.1-2.4,2.5v2.4H5.4c-1.4,0-2.6,0.8-3,2.4c-0.4,1.8-0.5,3,0,4.8c0.3,1.4,1.1,2.4,2.5,2.4h2.2 v-0.1c0-2.6,2.1-4.7,4.7-4.7h0h0h0C14.6,12,16.8,9.8,16.8,7.1L16.8,7.1z",
+	  "stroke-python-south": "M11.9,16.8h4.9 M7.2,16.8v2.4c0,1.3,1.1,2.1,2.4,2.4c1.5,0.4,3,0.5,4.8,0 c1.2-0.3,2.4-1,2.4-2.4v-2.4h2.4c1.4,0,1.9-1,2.4-2.4c0.5-1.5,0.5-2.9,0-4.8c-0.3-1.4-1-2.4-2.4-2.4h-2.4",
+	  "fill-python-north": "M9.3,3.5c0.5,0,0.9,0.4,0.9,0.9c0,0.5-0.4,0.9-0.9,0.9c-0.5,0-0.9-0.4-0.9-0.9C8.4,3.9,8.8,3.5,9.3,3.5 z",
+	  "fill-python-south": "M14.7,18.6c0.5,0,0.9,0.4,0.9,0.9c0,0.5-0.4,0.9-0.9,0.9c-0.5,0-0.9-0.4-0.9-0.9 C13.8,19,14.2,18.6,14.7,18.6z",
+	  "fill-question": "M9.9,7.5C10.5,7.2,11.1,7,11.9,7c1,0,1.9,0.2,2.5,0.7c0.7,0.5,1,1.2,1,2.1c0,0.6-0.1,1.1-0.4,1.5 c-0.2,0.2-0.5,0.6-1,0.9l-0.5,0.4c-0.3,0.2-0.4,0.4-0.5,0.7c-0.1,0.2-0.1,0.4-0.1,0.8h-1.8c0-0.8,0.1-1.3,0.2-1.6 c0.1-0.3,0.4-0.6,0.9-1l0.5-0.4c0.2-0.1,0.3-0.3,0.4-0.4c0.2-0.2,0.3-0.5,0.3-0.8c0-0.3-0.1-0.7-0.3-0.9c-0.2-0.3-0.6-0.4-1.1-0.4 c-0.5,0-0.9,0.2-1.1,0.5c-0.2,0.3-0.3,0.7-0.3,1.1H8.6C8.6,8.9,9.1,8,9.9,7.5z M11,15.1h2V17h-2V15.1z",
+	  "fill-nodejs": "M12,22c-0.3,0-0.5-0.1-0.8-0.2l-2.4-1.4c-0.4-0.2-0.2-0.3-0.1-0.3c0.5-0.2,0.6-0.2,1.1-0.5c0.1,0,0.1,0,0.2,0l1.9,1.1 c0.1,0,0.2,0,0.2,0l7.3-4.2c0.1,0,0.1-0.1,0.1-0.2V7.8c0-0.1,0-0.2-0.1-0.2l-7.3-4.2c-0.1,0-0.2,0-0.2,0L4.6,7.6 c-0.1,0-0.1,0.1-0.1,0.2v8.5c0,0.1,0,0.2,0.1,0.2l2,1.2c1.1,0.5,1.8-0.1,1.8-0.7V8.5c0-0.1,0.1-0.2,0.2-0.2h0.9 c0.1,0,0.2,0.1,0.2,0.2v8.4c0,1.5-0.8,2.3-2.2,2.3c-0.4,0-0.8,0-1.7-0.5l-1.9-1.1c-0.5-0.3-0.8-0.8-0.8-1.3V7.8 c0-0.5,0.3-1.1,0.8-1.3l7.3-4.2c0.5-0.3,1.1-0.3,1.5,0l7.3,4.2c0.5,0.3,0.8,0.8,0.8,1.3v8.5c0,0.5-0.3,1.1-0.8,1.3l-7.3,4.2 C12.5,21.9,12.3,22,12,22L12,22z M14.3,16.2c-3.2,0-3.9-1.5-3.9-2.7c0-0.1,0.1-0.2,0.2-0.2h0.9c0.1,0,0.2,0.1,0.2,0.2 c0.1,1,0.6,1.5,2.5,1.5c1.5,0,2.2-0.3,2.2-1.2c0-0.5-0.2-0.8-2.6-1.1c-2-0.2-3.2-0.6-3.2-2.2c0-1.5,1.2-2.4,3.3-2.4 c2.3,0,3.5,0.8,3.7,2.6c0,0.1,0,0.1-0.1,0.2c0,0-0.1,0.1-0.2,0.1h-1c-0.1,0-0.2-0.1-0.2-0.2c-0.2-1-0.8-1.3-2.3-1.3 c-1.7,0-1.9,0.6-1.9,1c0,0.5,0.2,0.7,2.5,1c2.3,0.3,3.3,0.7,3.3,2.3C17.9,15.3,16.6,16.2,14.3,16.2z",
+	  "fill-github": "M12,2.2c-5.5,0-10,4.5-10,10c0,4.4,2.9,8.2,6.8,9.5c0.5,0.1,0.7-0.2,0.7-0.5c0-0.2,0-0.9,0-1.7 c-2.8,0.6-3.4-1.3-3.4-1.3C5.7,17.1,5,16.7,5,16.7c-0.9-0.6,0.1-0.6,0.1-0.6c1,0.1,1.5,1,1.5,1C7.5,18.7,9,18.3,9.5,18 c0.1-0.6,0.3-1.1,0.6-1.3c-2.2-0.3-4.6-1.1-4.6-4.9c0-1.1,0.4-2,1-2.7C6.5,8.8,6.2,7.8,6.7,6.4c0,0,0.8-0.3,2.7,1 c0.8-0.2,1.7-0.3,2.5-0.3c0.8,0,1.7,0.1,2.5,0.3c1.9-1.3,2.7-1,2.7-1c0.5,1.4,0.2,2.4,0.1,2.6c0.6,0.7,1,1.6,1,2.7 c0,3.8-2.3,4.7-4.6,4.9c0.4,0.3,0.7,0.9,0.7,1.9c0,1.3,0,2.4,0,2.7c0,0.3,0.2,0.6,0.7,0.5c4-1.3,6.8-5.1,6.8-9.5 C22,6.7,17.5,2.2,12,2.2z",
+	  "fill-octocat": "M17.7,11.9c0-1-0.3-1.8-0.9-2.4c0.1-0.2,0.4-1.1-0.1-2.4c0,0-0.8-0.2-2.5,0.9c-0.7-0.2-1.5-0.3-2.3-0.3 c-0.8,0-1.5,0.1-2.3,0.3C8,6.8,7.3,7.1,7.3,7.1C6.8,8.3,7.1,9.2,7.2,9.5c-0.6,0.6-0.9,1.4-0.9,2.4c0,3.5,2.1,4.2,4.1,4.4 C10,16.6,9.8,17.1,9.8,18c0,1.2,0,3.1,0,3.1c0.7,0.2,1.5,0.3,2.2,0.3s1.5-0.1,2.2-0.3c0,0,0-1.9,0-3.1c0-0.8-0.3-1.4-0.6-1.7 C15.6,16.1,17.7,15.3,17.7,11.9z",
+	  "fill-bolt": "M13.2,11l5.6-0.7L5.9,22l5.7-9.3l-6.5,1L18.9,2L13.2,11z",
+	  "fill-auth0": "M17.3,18.2l-2-6.2l5.3-3.8H14L12,2l0,0h6.5l2,6.2l0,0l0,0C21.7,11.8,20.5,15.8,17.3,18.2L17.3,18.2z M6.7,18.2L6.7,18.2L12,22l5.3-3.8L12,14.4L6.7,18.2L6.7,18.2z M3.5,8.2C2.3,12,3.7,16,6.7,18.2l0,0l2-6.2L3.5,8.2l6.5,0L12,2l0,0 H5.5L3.5,8.2L3.5,8.2z",
+	  "fill-google1": "M12.2,2C8.3,2,4.9,4.3,3.3,7.5l3.3,2.6C7.4,7.7,9.6,6,12.2,6c1.9,0,3.2,0.8,3.8,1.5l2.9-2.8 C17.2,3,14.9,2,12.2,2z",
+	  "fill-google2": "M6.3,12c0-0.7,0.1-1.3,0.3-1.9L3.3,7.5C2.6,8.9,2.2,10.4,2.2,12s0.4,3.2,1.1,4.5l3.3-2.6 C6.4,13.3,6.3,12.7,6.3,12z",
+	  "fill-google3": "M12.2,18c-2.6,0-4.8-1.8-5.6-4.1l-3.3,2.6c1.6,3.3,5,5.5,8.9,5.5c2.7,0,5-0.9,6.6-2.4l-3.3-2.5 C14.8,17.6,13.7,18,12.2,18z",
+	  "fill-google4": "M12.2,10.2V14h5.4c-0.1,0.9-0.7,2.2-2,3.1l3.2,2.5c1.9-1.7,3-4.3,3-7.4c0-0.8-0.1-1.4-0.2-2 C21.6,10.2,12.2,10.2,12.2,10.2z",
+	  "fill-twitter": "M8.3,20.1c7.5,0,11.7-6.3,11.7-11.7c0-0.2,0-0.4,0-0.5c0.8-0.6,1.5-1.3,2-2.1 c-0.7,0.3-1.5,0.5-2.4,0.6c0.9-0.5,1.5-1.3,1.8-2.3c-0.8,0.5-1.7,0.8-2.6,1C17.3,3.5,14.7,3.4,13,5c-1.1,1-1.5,2.5-1.2,3.9 C8.5,8.7,5.5,7.2,3.4,4.6c-1.1,1.9-0.5,4.3,1.3,5.5c-0.7,0-1.3-0.2-1.9-0.5c0,0,0,0,0,0.1c0,2,1.4,3.6,3.3,4 c-0.6,0.2-1.2,0.2-1.9,0.1c0.5,1.7,2.1,2.8,3.8,2.8c-1.5,1.1-3.2,1.8-5.1,1.8c-0.3,0-0.7,0-1-0.1C3.9,19.5,6.1,20.1,8.3,20.1",
+	  "stroke-precursor": "M35.7,45.3V95 M60.5,84.4C82,78.6,94.8,56.5,89,34.9C83.2,13.4,61.1,0.6,39.5,6.4S5.2,34.3,11,55.9",
+	  "stroke-check": "M35,80 L5,50 M95,20L35,80",
+	  "stroke-times": "M82.5,82.5l-65-65 M82.5,17.5l-65,65",
+	  "stroke-plus": "M50,72.5v-45 M27.5,50h45",
+	  "stroke-minus": "M27.5,50h45",
+	  "stroke-cursor": "M23.3,80.4V5 l53.3,53.3c0,0-21.5,0-21.5,0s12.4,29.8,12.4,29.8L50.9,95c0,0-12.4-29.8-12.4-29.8S23.3,80.4,23.3,80.4z",
+	  "stroke-border-circle": "M95,50c0,24.9-20.1,45-45,45S5,74.9,5,50S25.1,5,50,5 S95,25.1,95,50z",
+	  "stroke-border-square": "M95,95H5V5h90V95z",
+	  "stroke-rectangle": "M87.5,87.5h-75v-75h75V87.5z M20,5H5v15h15V5z M95,5H80v15h15V5z M20,80H5v15h15V80z M95,80H80v15h15V80z",
+	  "stroke-line": "M95,20H80V5h15V20z M20,80H5v15h15V80z M87.5,12.5l-75,75",
+	  "stroke-text": "M65.9,92.4H34.1H50 V7.6 M95,21.4c0,0-7.9-13.8-7.9-13.8c0,0-74.1,0-74.1,0L5,21.4",
+	  "stroke-pencil": "M89.5,10.5c3.9,3.9,6.3,7.8,5.3,8.8L24.3,89.8L5,95l5.2-19.3L80.7,5.2C81.7,4.2,85.6,6.6,89.5,10.5z M22.5,88.1L11.9,77.5 M81.3,8.1c0.9,1.7,2.6,3.8,4.7,5.9c2.1,2.1,4.2,3.8,5.9,4.7 M70.3,19.1c0.9,1.7,2.6,3.8,4.7,5.9c2.1,2.1,4.2,3.8,5.9,4.7 M68.3,21.1c0.9,1.7,2.6,3.8,4.7,5.9c2.1,2.1,4.2,3.8,5.9,4.7",
+	  "stroke-ellipse": "M57.5,5h-15v15h15V5z M95,42.5H80v15h15V42.5z M20,42.5H5v15h15V42.5z M57.5,80h-15v15h15V80z M87.5,50c0,20.7-16.8,37.5-37.5,37.5 S12.5,70.7,12.5,50S29.3,12.5,50,12.5S87.5,29.3,87.5,50z",
+	  "stroke-users": "M59.2,40.8c0,11.5-9.3,20.8-20.8,20.8s-20.8-9.3-20.8-20.8S26.8,20,38.3,20S59.2,29.3,59.2,40.8z M16.7,57.1 C9.5,63.3,5,72.3,5,82.5C5,89.4,19.9,95,38.3,95s33.3-5.6,33.3-12.5c0-10.2-4.5-19.2-11.7-25.4 M64.8,46.4 c10-1.5,17.7-10.1,17.7-20.6C82.5,14.3,73.2,5,61.7,5c-7.3,0-13.7,3.8-17.5,9.5 M77.4,78.5c10.5-2.1,17.6-6.3,17.6-11 c0-10.2-4.5-19.2-11.7-25.4",
+	  "stroke-chats": "M60.8,63.2c-0.2,12-12.9,21.5-28.3,21.2 c-3.5-0.1-6.8-0.6-9.8-1.6L8.5,88.8c0,0,4.8-9.7,0.4-15.3c-2.6-3.4-4-7.3-3.9-11.4c0.2-12,12.9-21.5,28.3-21.2 C48.7,41.2,61,51.2,60.8,63.2z M68.5,73.9L89.7,83c0,0-7.2-14.5-0.6-22.9c3.8-5,6-10.9,5.9-17.2c-0.4-18-19.4-32.2-42.5-31.7 c-19.1,0.4-35,10.7-39.8,24.4",
+	  "stroke-crosshair": "M50,5v90 M5,50h90",
+	  "stroke-ibeam": "M50,10v80 M41.3,95h-10 M68.7,95h-10 M45,50h10 M50,90 l-8.7,5 M50,90l8.7,5 M58.7,5h10 M31.3,5h10 M58.7,5L50,10 M41.3,5l8.7,5",
+	  "stroke-blog": "M85,32.5H35 M35,50h50 M35,67.5h50 M25,85h60 c5.5,0,10-4.5,10-10V15H25v60c0,5.5-4.5,10-10,10S5,80.5,5,75V35h15",
+	  "stroke-clock": "M95,50c0,24.9-20.1,45-45,45S5,74.9,5,50S25.1,5,50,5 S95,25.1,95,50z M71.2,71.2C71.2,71.2,50,50,50,50V20",
+	  "stroke-delete": "M35,80L5,50c0,0,30-30,30-30s60,0,60,0v60 C95,80,35,80,35,80z M45,35l30,30 M75,35L45,65",
+	  "stroke-shift": "M5,52L50,7l45,45H70.5V93H29.5V52H5z",
+	  "stroke-option": "M95,15H65 M95,85H75L35,15H5",
+	  "stroke-control": "M86,41L50,5L14,41",
+	  "stroke-command": "M65,35v30H35V35H65z M20,5C11.7,5,5,11.7,5,20 c0,8.3,6.7,15,15,15h15V20C35,11.7,28.3,5,20,5z M95,20c0-8.3-6.7-15-15-15c-8.3,0-15,6.7-15,15v15h15C88.3,35,95,28.3,95,20z M5,80c0,8.3,6.7,15,15,15c8.3,0,15-6.7,15-15V65H20C11.7,65,5,71.7,5,80z M80,65H65v15c0,8.3,6.7,15,15,15c8.3,0,15-6.7,15-15 C95,71.7,88.3,65,80,65z",
+	  "stroke-esc": "M95,46.6c-3.2-3.2-7.4-4.8-11.7-4.8 c-9.1,0-16.5,7.4-16.5,16.5s7.4,16.5,16.5,16.5c4.2,0,8.4-1.6,11.7-4.8 M40.4,72.3c1.6,1.6,3.7,2.4,5.8,2.4c4.6,0,8.2-3.7,8.2-8.2 s-3.7-8.2-8.2-8.2S38,54.6,38,50s3.7-8.2,8.2-8.2c2.1,0,4.2,0.8,5.8,2.4 M29.7,74.7H5c0,0,0-49.5,0-49.5h24.7 M5,50h18.6",
+	  "stroke-space": "M95,65v30H5V65",
+	  "stroke-click-1": "M29.2,30h-24",
+	  "stroke-click-2": "M31.8,23.6L19.1,10.9",
+	  "stroke-click-3": "M38.2,21V9",
+	  "stroke-private": "M72.5,50V37.5 C72.5,25.1,62.4,15,50,15S27.5,25.1,27.5,37.5V50",
+	  "stroke-private-bottom": "M80,95H20V50h60V95z",
+	  "stroke-public": "M65,95H5V50h60V95z M95,50V27.5 C95,15.1,84.9,5,72.5,5S50,15.1,50,27.5V50",
+	  "stroke-mouse": "M58,5h17c2.8,0,5,2.2,5,5v55c0,16.6-13.4,30-30,30 S20,81.6,20,65V10c0-2.8,2.2-5,5-5h20c2.8,0,5,2.2,5,5c0,0,0,25,0,25",
+	  "stroke-newdoc": "M58,80V50 M43,65h30 M12,77l0-52L32,5l34,0v20 M58,35 c-16.6,0-30,13.4-30,30s13.4,30,30,30s30-13.4,30-30S74.6,35,58,35z M12,25h20V5",
+	  "stroke-doc": "M84,94H16V6h68V94z",
+	  "stroke-docs": "M87.5,95h-51V29h51V95z M63.5,29V5h-51v66h24",
+	  "stroke-docs-team": "M63.5,95h-51V29h51V95z M63.5,71h24V5h-51v24",
+	  "stroke-login": "M35,82.1V70 M5,43.6h42.9 M30.7,60.7l17.1-17.1 L30.7,26.4 M35,17.1V5h60c0,0,0,77.1,0,77.1L52.1,95V17.9L88.3,7",
+	  "stroke-logout": "M5,82.1 M65,55v27.1 M95,43.6H52.1 M77.9,60.7L95,43.6 L77.9,26.4 M65,32.1V5H5c0,0,0,77.1,0,77.1L47.9,95V17.9L11.5,7",
+	  "stroke-info": "M50,40v35 M59,66l-9,9 M41,49l9-9 M50,25 c-1.4,0-2.5,1.1-2.5,2.5S48.6,30,50,30s2.5-1.1,2.5-2.5S51.4,25,50,25z M95,50c0,24.9-20.1,45-45,45S5,74.9,5,50S25.1,5,50,5 S95,25.1,95,50z",
+	  "stroke-home": "M95,95H5 V50L50,5l45,45V95z M80,30V5",
+	  "stroke-hash": "M54.7,95L72.2,5 M46.7,5L29.3,95 M20,37h65 M15,67h65",
+	  "stroke-team": "M61.8,38.2c13,13,13,34,0,47s-34,13-47,0s-13-34,0-47S48.8,25.3,61.8,38.2z M38.2,14.7c-13,13-13,34,0,47s34,13,47,0s13-34,0-47 S51.2,1.8,38.2,14.7z",
+	  "stroke-arrow-up": "M50,95V5 M86,41L50,5L14,41",
+	  "stroke-arrow-down": "M50,95V5 M14,59l36,36l36-36",
+	  "stroke-arrow-right": "M95,50H5 M59,86l36-36L59,14",
+	  "stroke-arrow-left": "M95,50H5 M41,14L5,50l36,36",
+	  "stroke-menu-top": "M5,25h90",
+	  "stroke-menu-mid": "M5,50h90",
+	  "stroke-menu-btm": "M5,75h90",
+	  "stroke-read-only": "M50,25.9c-18.8,0-35.3,9.6-45,24.1 c9.7,14.5,26.2,24.1,45,24.1S85.3,64.5,95,50C85.3,35.5,68.8,25.9,50,25.9z",
+	  "stroke-lock-top": "M75,45V30C75,16.2,63.8,5,50,5S25,16.2,25,30v15",
+	  "stroke-chat": "M50,5c24.9,0,45,20.1,45,45c0,24.9-20.1,45-45,45H5V50 C5,25.1,25.1,5,50,5z",
+	  "stroke-sound": "M50,18.2l0,63.6L33.2,65h-15V35h15L50,18.2z",
+	  "stroke-wave1": "M60.6,60.6C63.3,57.9,65,54.1,65,50s-1.7-7.9-4.4-10.6",
+	  "stroke-wave2": "M71.2,71.2C76.6,65.8,80,58.3,80,50 c0-8.3-3.4-15.8-8.8-21.2",
+	  "stroke-wave3": "M81.8,81.8C90,73.7,95,62.4,95,50 c0-12.4-5-23.7-13.2-31.8",
+	  "stroke-mic": "M80,50c0,16.6-13.4,30-30,30S20,66.6,20,50 M50,5 c-8.3,0-15,6.7-15,15v30c0,8.3,6.7,15,15,15c8.3,0,15-6.7,15-15V20C65,11.7,58.3,5,50,5z M50,80v15 M65,95H35",
+	  "stroke-slash-forward": "M5,95L95,5",
+	  "stroke-slash-backward": "M5,5l90,90",
+	  "stroke-at": "M70,50c0,11-9,20-20,20s-20-9-20-20s9-20,20-20 S70,39,70,50z M70,25v50 M90.3,70c3-6,4.7-12.8,4.7-20C95,25.1,74.9,5,50,5S5,25.1,5,50c0,24.9,20.1,45,45,45c7.2,0,14-1.7,20-4.7",
+	  "stroke-sharing": "M50,5h45c0,0,0,45,0,45 M50,50L95,5 M27.5,5H5v90 c0,0,90,0,90,0V72.5",
+	  "stroke-email": "M95,35v60H5V35L50,5L95,35z M95,35L5,95 M5,35l90,60",
+	  "stroke-phone": "M70,95 H30c-5.5,0-10-4.5-10-10V15c0-5.5,4.5-10,10-10h40c5.5,0,10,4.5,10,10v70C80,90.5,75.5,95,70,95z M50.8,70.1 c-3.4-0.5-6.2,2.4-5.7,5.7c0.3,2.1,2,3.8,4.1,4.1c3.4,0.5,6.2-2.4,5.7-5.7C54.6,72.1,52.9,70.4,50.8,70.1z M65,20H35v35h30V20z",
+	  "stroke-activity": "M92.1,34.1c0,0-31.8,31.8-31.8,31.8L39.1,44.7L17.9,65.9 M5,5v90h90",
+	  "stroke-credit": "M95,80H5V20h90V80z M5,35h90 M15,65h50",
+	  "stroke-heart": "M88.4,50c8.8-8.8,8.8-23,0-31.8s-23-8.8-31.8,0 C52.2,22.6,50,28.3,50,34.1c0-5.8-2.2-11.5-6.6-15.9c-8.8-8.8-23-8.8-31.8,0c-8.8,8.8-8.8,23,0,31.8c0,0,38.4,38.4,38.4,38.4 S88.4,50,88.4,50z",
+	  "stroke-file": "M80,95H20V5h60V95z",
+	  "stroke-vertical": "M50,95V5",
+	  "stroke-horizontal": "M5,50h90",
+	  "stroke-requests": "M95,65v30H65 c-16.6,0-30-13.4-30-30c0-16.6,13.4-30,30-30C81.6,35,95,48.4,95,65z M63.3,25C59.2,13.4,48.1,5,35,5C18.4,5,5,18.4,5,35v30h20 M65,80V50 M50,65h30",
+	  "stroke-chat-team": "M35,35c16.6,0,30,13.4,30,30 c0,16.6-13.4,30-30,30H5V65C5,48.4,18.4,35,35,35z M75,65h20V35C95,18.4,81.6,5,65,5c-13.1,0-24.2,8.4-28.3,20",
+	  "fill-logomark": "M43,100H29.5V39H43V100z M94,33.8C90.9,22,83.3,12.2,72.8,6.1C62.2,0,50-1.6,38.2,1.6 C26.5,4.7,16.6,12.3,10.6,22.8C4.5,33.3,2.9,45.6,6,57.4l1.7,6.4l12.7-3.4l-1.7-6.4c-4.6-17.2,5.6-35,22.9-39.6 c8.3-2.2,17.1-1.1,24.6,3.2c7.5,4.3,12.8,11.3,15.1,19.7c4.6,17.2-5.6,35-22.9,39.6L52,78.5l3.4,12.7l6.4-1.7 C86.1,83.1,100.5,58,94,33.8z",
+	  "fill-google": "M53.8,0C35.5,0,25.6,11.6,25.6,24.5c0,9.8,7.1,21,21.6,21h3.7c0,0-1,2.4-1,4.8c0,3.5,1.2,5.4,3.9,8.4 c-25,1.5-35.1,11.6-35.1,22.5c0,9.5,9.1,18.9,28.2,18.9c22.6,0,34.4-12.6,34.4-24.9c0-8.7-4.3-13.5-15.3-21.7 c-3.2-2.5-3.9-4.1-3.9-6c0-2.7,1.6-4.5,2.2-5.1c1-1.1,2.8-2.3,3.5-2.9c3.7-3.1,8.9-7.7,8.9-17c0-6.3-2.6-11.8-8.6-16.9h7.3L80.9,0 L53.8,0L53.8,0z M48.8,4.1c3.3,0,6.1,1.2,9,3.6c3.2,2.9,8.4,10.8,8.4,20.5c0,10.5-8.2,13.4-12.6,13.4c-2.2,0-4.8-0.6-6.9-2.1 C41.8,36.4,37,28,37,17.9C37,8.9,42.4,4.1,48.8,4.1z M56,62.7c1.4,0,2.4,0.1,2.4,0.1s3.3,2.4,5.6,4.1c5.4,4.2,8.7,7.5,8.7,13.2 c0,7.9-7.4,14.1-19.3,14.1c-13.1,0-23.1-6.1-23.1-16C30.4,70,37.2,62.9,56,62.7L56,62.7z",
+	  "fill-dribbble": "M50,99.9C22.4,99.9,0,77.5,0,50C0,22.5,22.4,0.1,50,0.1 c27.6,0,50,22.4,50,49.9C100,77.5,77.6,99.9,50,99.9L50,99.9z M92.2,56.8c-1.5-0.5-13.2-4-26.6-1.8c5.6,15.3,7.9,27.8,8.3,30.4 C83.4,79,90.3,68.7,92.2,56.8L92.2,56.8z M66.7,89.3C66,85.6,63.6,72.5,57.6,57c-0.1,0-0.2,0.1-0.3,0.1 c-24.1,8.4-32.7,25.1-33.5,26.6c7.2,5.6,16.3,9,26.2,9C55.9,92.7,61.6,91.5,66.7,89.3L66.7,89.3z M18.3,78.6 c1-1.7,12.7-21,34.7-28.1c0.6-0.2,1.1-0.3,1.7-0.5c-1.1-2.4-2.2-4.8-3.5-7.2c-21.3,6.4-42,6.1-43.9,6.1c0,0.4,0,0.9,0,1.3 C7.3,61,11.5,71,18.3,78.6L18.3,78.6z M8.2,41.3c1.9,0,19.5,0.1,39.5-5.2C40.6,23.6,33,13,31.8,11.5C19.9,17.1,11,28.1,8.2,41.3 L8.2,41.3z M40,8.6c1.2,1.6,8.9,12.1,15.9,25c15.2-5.7,21.6-14.3,22.4-15.4C70.8,11.5,60.9,7.4,50,7.4C46.6,7.4,43.2,7.8,40,8.6 L40,8.6z M83.1,23.1c-0.9,1.2-8.1,10.4-23.8,16.8c1,2,1.9,4.1,2.8,6.2c0.3,0.7,0.6,1.5,0.9,2.2c14.2-1.8,28.3,1.1,29.7,1.4 C92.6,39.6,89,30.4,83.1,23.1L83.1,23.1z",
+	  "fill-slack": "M99.7,52.8l-0.1-0.4c-1.2-3.5-4.5-5.8-8.3-5.7c-0.9,0-1.9,0.2-2.8,0.5l-9.8,3.3l-6.3-18.8l0,0l0,0 c9.3-3.2,9.4-3.2,9.4-3.2c3.9-1.3,7.2-5.5,5.9-10.1L87.6,18c-1.2-3.5-4.4-5.8-8.3-5.8c-0.9,0-1.7,0.1-2.6,0.4L67,15.8l-3.2-9.6 c-0.7-2.2-2.3-4-4.4-5c-1.2-0.6-2.6-0.9-3.9-0.9c-0.9,0-1.8,0.2-2.7,0.5c-4.4,1.5-6.9,6.2-5.6,10.6l0.1,0.4l3.2,9.6l-18.6,6.2 L28.7,18c-1.2-3.6-4.5-6-8.3-5.9c-0.9,0-1.8,0.2-2.7,0.5c-4.4,1.5-6.9,6.2-5.6,10.6c0,0.1,0.1,0.3,0.1,0.4l3.2,9.5l-9.4,3.2 c-4.4,1.5-6.9,6.1-5.6,10.6c0,0.1,0.1,0.3,0.1,0.4c1.2,3.5,4.3,5.7,8.1,5.7l0,0c1,0,1.9-0.2,2.9-0.5c3.3-1.1,6.4-2.2,9.4-3.2l0,0v0 l0,0l6.3,18.7l-9.4,3.2c-4.4,1.5-6.9,6.2-5.6,10.7c0,0.1,0.1,0.3,0.1,0.4c1.2,3.4,4.3,5.6,8.1,5.6v0c1,0,2-0.2,3-0.5l9.2-3.1 l3.3,9.7c1.2,3.6,4.5,6,8.3,5.9c0.9,0,1.8-0.2,2.7-0.5c4.4-1.5,6.9-6.2,5.6-10.6c0-0.1-0.1-0.3-0.1-0.4L49,78.4l18.6-6.4l3.3,9.9 c1.2,3.6,4.5,6,8.3,5.9l0,0c0.9,0,1.8-0.2,2.7-0.5c4.4-1.5,6.9-6.2,5.5-10.8l-0.1-0.2l-3.4-10l10.3-3.5c0,0,3.2-1.4,4.2-3 C100,57.8,100.4,55.1,99.7,52.8z M43.6,62.3l-6.3-18.7c7.3-2.5,13.5-4.6,18.6-6.3L62.2,56L43.6,62.3z",
+	  "fill-cognitect": "M75.6,59.9L35.2,74.6V25.4l40.4,14.7V4.2c0-0.4-0.2-0.7-0.6-0.8l-9.1-3.3C65.7,0,65.4,0,65.1,0.2 c-0.2,0.2-0.4,0.4-0.4,0.7v23.7L25.6,10.3c-0.3-0.1-0.6-0.1-0.8,0.1c-0.2,0.2-0.4,0.4-0.4,0.7v77.7c0,0.3,0.1,0.5,0.4,0.7 c0.2,0.2,0.5,0.2,0.8,0.1l39.2-14.3v23.7c0,0.3,0.1,0.5,0.4,0.7c0.1,0.1,0.3,0.2,0.5,0.2c0.1,0,0.2,0,0.3-0.1l9.1-3.3 c0.3-0.1,0.6-0.5,0.6-0.8L75.6,59.9L75.6,59.9z",
+	  "fill-cognician": "M67.3,39.6c0.1-0.2,0.8-0.9,1.6-0.9H69c0.5,0.1,0.8,0.2,1,0.7c0.1,0.1,0.1,0.5,0.1,0.6 c-0.2,0.4-0.4,0.8-1.1,1.2c-0.3,0.2-1.7,0.8-2.4,0.9l-0.4,0.1C66.5,41.3,66.9,40.3,67.3,39.6 M39.4,42.2c-0.7-0.1-2.2-0.8-2.4-0.9 c-0.7-0.5-0.9-0.9-1.1-1.2c-0.1-0.1,0-0.5,0.1-0.6c0.2-0.5,0.5-0.6,1-0.7H37c0.8,0,1.5,0.7,1.6,0.9c0.5,0.7,0.8,1.7,1.1,2.7 L39.4,42.2L39.4,42.2z M85.4,71.6C80.6,78.1,74.2,82,66.9,83.3c-1.2,0.2-2.9,0.6-4.6,0.2c-3.2-0.7-3.4-4.2-3.3-4.7l6.1-31.6 c0.5-0.1,0.9-0.2,1.3-0.3l1-0.2c1.5-0.3,3.6-1.3,4.3-1.8c1.5-1.2,2.2-2.3,2.6-3.1c0.8-1.8,0.3-3.6-0.1-4.5c-0.9-2-2.7-3.2-4.9-3.3 c-2.6-0.2-4.9,1.5-5.9,3c-1.1,1.8-1.8,4.2-2.2,6c-0.8,0.1-1.6,0.2-2.3,0.3c1.9-4.2,1-7-0.1-8.7c-1-1.6-3-3-5.7-2.9 c-2.8-0.1-4.7,1.3-5.7,2.9c-1.1,1.7-1.9,4.6-0.1,8.7c-0.8-0.1-1.6-0.2-2.3-0.3c-0.5-1.9-1.2-4.3-2.2-6c-1-1.6-3.2-3.2-5.9-3 c-2.2,0.1-3.9,1.3-4.9,3.3c-0.4,0.9-0.9,2.8-0.1,4.5c0.4,0.9,1,2,2.6,3.1c0.7,0.5,2.8,1.5,4.3,1.8l1,0.2c0.4,0.1,0.9,0.2,1.3,0.3 l6,32.5c0,2.1,1.2,4.8-5.9,6.8c-8.8,2.1-17.6,4.2-26.4,6.3c2.5-1.9,5-3.9,7.4-5.9c1.3-1.1,2.8-2.1,4.1-3.2c1.8-1.3,2.2-2.2,1.3-3.3 c-0.1-0.5-0.7-1.1-1.6-1.9c-4.6-3.5-8.3-7.7-11.1-12.5c-1.5-2.8-2.8-5.7-3.6-9C4.8,33.6,20.6,9.1,44.7,5.5 c18.2-2.7,35.5,6.1,43.7,21.4c1.8,3.5,3.2,7.3,4,11.4C94.4,50.2,92.8,61.6,85.4,71.6 M52.4,36.6c0.2-0.1,0.4-0.1,0.6-0.1 c0.2,0,0.4,0.1,0.6,0.1c0.6,0.2,1.8,0.9,1.5,3c0,0-0.3,1.4-1.6,2.5c-0.1,0.1-0.2,0.2-0.4,0.3c-0.2-0.1-0.4-0.2-0.4-0.3 c-1.3-1.1-1.6-2.5-1.6-2.5C50.6,37.5,51.9,36.8,52.4,36.6 M98.3,43.5c-0.5-6.8-2.2-13-5-18.4C89,16.4,81.8,9.5,72,4.7 c-13.2-6.4-26.7-6-40.2-0.2C6.5,15.4-2.4,44.3,9.2,66.6c2.5,5.2,6.1,9.9,10.9,14.1c0.3,0.2,0.6,0.5,0.8,0.8 c-2.8,2.2-5.5,4.3-8.1,6.4c-3.4,2.6-6.8,5.3-10.2,8c-0.9,0.7-1.3,1.5-0.8,2.9c0.8,1.9,3.4,1.3,3.6,1.2c9.5-2.3,19.1-4.6,28.6-6.9 c3.3-0.8,6.6-1.6,9.8-2.6c0,0,2.3-0.6,3.9-1.8c2.2-1.6,4.3-4.2,3.9-8.1l-6-32.4c1.5,0.2,13.1,0.2,14.5,0l-5.9,30.5 c-0.5,6.7,5.9,9.6,7.7,9.8l0.2,0.1c2.3,0.3,6.1-0.5,9.3-1.5c8.4-2.7,15.3-7.4,20.1-14.8C97.3,63.3,99.1,53.6,98.3,43.5",
+	  "fill-scroll-north": "M35,27.5l15-15l15,15",
+	  "fill-scroll-south": "M65,72.5l-15,15l-15-15H65z",
+	  "fill-click-cursor": "M35,66.9V25l29.6,29.6h-12l6.9,16.6L50.3,75l-6.9-16.6L35,66.9z",
+	  "fill-dot": "M57.5,50c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S57.5,45.9,57.5,50z",
+	  "fill-ellipsis": "M59,50c0,5-4,9-9,9s-9-4-9-9s4-9,9-9S59,45,59,50z M14,41c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S19,41,14,41z M86,41 c-5,0-9,4-9,9s4,9,9,9s9-4,9-9S91,41,86,41z",
+	  "fill-ellipsis-vertical": "M50,41c5,0,9,4,9,9s-4,9-9,9s-9-4-9-9S45,41,50,41z M41,86c0,5,4,9,9,9s9-4,9-9s-4-9-9-9S41,81,41,86z M41,14c0,5,4,9,9,9s9-4,9-9s-4-9-9-9S41,9,41,14z",
+	  "fill-star": "M50,2.4l15.5,31.3l34.5,5L75,63.1l5.9,34.4L50,81.3L19.1,97.6L25,63.1L0,38.8l34.6-5L50,2.4z",
+	  "fill-north": "M30,20L50,0l20,20H30z",
+	  "fill-south": "M70,80l-20,20L30,80H70z",
+	  "fill-east": "M80,30l20,20L80,70V30z",
+	  "fill-west": "M20,70L0,50l20-20V70z",
+	  "fill-up-down": "M55,80H45V20h10V80z",
+	  "fill-left-right": "M80,55H20V45h60V55z",
+	  "fill-lock-bottom": "M87.5,95h-75V45h75V95z",
+	  "fill-read-only": "M62.5,50c0,6.9-5.6,12.5-12.5,12.5S37.5,56.9,37.5,50 S43.1,37.5,50,37.5S62.5,43.1,62.5,50z",
+	  "fill-private": "M80,95H20V50h60V95z",
+	  "fill-chat1": "M32.5,50c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S32.5,45.9,32.5,50z",
+	  "fill-chat2": "M82.5,50c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S82.5,45.9,82.5,50z",
+	  "fill-x1": "M32.5,25c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S32.5,20.9,32.5,25z",
+	  "fill-x2": "M82.5,25c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S82.5,20.9,82.5,25z",
+	  "fill-x3": "M45,37.5c0,4.1-3.4,7.5-7.5,7.5S30,41.6,30,37.5s3.4-7.5,7.5-7.5S45,33.4,45,37.5z",
+	  "fill-x4": "M70,37.5c0,4.1-3.4,7.5-7.5,7.5S55,41.6,55,37.5s3.4-7.5,7.5-7.5S70,33.4,70,37.5z",
+	  "fill-x5": "M57.5,50c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S57.5,45.9,57.5,50z",
+	  "fill-x6": "M45,62.5c0,4.1-3.4,7.5-7.5,7.5S30,66.6,30,62.5s3.4-7.5,7.5-7.5S45,58.4,45,62.5z",
+	  "fill-x7": "M70,62.5c0,4.1-3.4,7.5-7.5,7.5S55,66.6,55,62.5s3.4-7.5,7.5-7.5S70,58.4,70,62.5z",
+	  "fill-x8": "M32.5,75c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S32.5,70.9,32.5,75z",
+	  "fill-x9": "M82.5,75c0,4.1-3.4,7.5-7.5,7.5s-7.5-3.4-7.5-7.5s3.4-7.5,7.5-7.5S82.5,70.9,82.5,75z",
+	  "fill-png": "M100,76.1H50H30H0l25-25l15,15l25-25L100,76.1z M32.3,23.9c-4,0-7.3,3.3-7.3,7.3s3.3,7.3,7.3,7.3 s7.3-3.3,7.3-7.3S36.3,23.9,32.3,23.9z",
+	  "fill-pdf": "M100,66.1c-0.4-5.2-9.2-8.6-9.2-8.6c-3.4-1.2-7.1-1.8-11.3-1.8c-4.5,0-9.3,0.7-15.6,2.1 c-5.5-3.9-10.3-8.8-13.9-14.3c-1.6-2.4-3-4.8-4.2-7.1c3-7.2,5.7-15,5.2-23.7C50.6,5.7,47.5,1,43.2,1c-2.9,0-5.5,2.2-7.5,6.5 C32,15.1,33,24.9,38.5,36.6c-2,4.7-3.9,9.6-5.7,14.3c-2.2,5.9-4.5,11.9-7.1,17.7C18.4,71.5,12.4,75,7.5,79.2 C4.2,82.1,0.2,86.4,0,90.8c-0.1,2.1,0.6,4,2.1,5.6C3.7,98.1,5.6,99,7.8,99c7.1,0,14-9.8,15.3-11.8c2.6-4,5.1-8.4,7.5-13.4 c6.1-2.2,12.5-3.8,18.8-5.4l2.2-0.6c1.7-0.4,3.4-0.9,5.2-1.4c1.9-0.5,3.9-1,5.8-1.6c6.4,4.1,13.3,6.7,20.1,7.7 c5.7,0.8,10.7,0.3,14.1-1.4C99.9,69.5,100.1,67.1,100,66.1z M17.6,83.6c-2.8,4.3-7.5,8.8-9.8,8.8c-0.2,0-0.5,0-0.9-0.5 c-0.3-0.3-0.3-0.5-0.3-0.8c0.1-1.6,2.2-4.4,5.2-7c2.7-2.4,5.8-4.4,9.3-6.3C19.9,79.9,18.8,81.8,17.6,83.6z M41.6,10.3 c0.6-1.3,1.2-2,1.5-2.4c0.5,0.8,1.2,2.6,1.4,5.2c0.3,5.1-0.8,10-2.4,14.8C40,22,39.1,15.5,41.6,10.3z M55.1,60.1 c-1.8,0.5-3.5,0.9-5.1,1.4L47.7,62c-4.5,1.1-9.1,2.3-13.6,3.7c1.7-4.1,3.3-8.3,4.9-12.4c1.2-3,2.3-6.1,3.6-9.2 c0.6,1,1.3,2.1,1.9,3.1c3.1,4.7,6.9,9,11.3,12.7C55.6,59.9,55.3,60,55.1,60.1z M83.6,66.1c-3.7-0.5-7.4-1.7-11.1-3.3 c6.6-1,11.6-0.7,16,0.9c1,0.4,2.7,1.3,3.9,2.2C90.2,66.5,87.1,66.6,83.6,66.1z",
+	  "fill-code": "M41.6,82.8L34.3,80l24.1-62.8l7.4,2.8L41.6,82.8z M74.8,75.2l-5.6-5.6L88.8,50L69.2,30.4l5.6-5.6L100,50 L74.8,75.2z M25.2,75.2L0,50l25.2-25.2l5.6,5.6L11.2,50l19.6,19.6L25.2,75.2z",
+	  "fill-file-pdf": "M72.5,57.2c-0.2-2.4-4.1-3.9-4.2-3.9c-1.5-0.5-3.2-0.8-5.1-0.8c-2,0-4.2,0.3-7,0.9c-2.5-1.8-4.6-4-6.3-6.4 c-0.7-1.1-1.3-2.2-1.9-3.2c1.4-3.2,2.6-6.7,2.4-10.7c-0.2-3.1-1.6-5.2-3.5-5.2c-1.3,0-2.5,1-3.4,2.9c-1.6,3.4-1.2,7.8,1.3,13.1 c-0.9,2.1-1.7,4.3-2.5,6.4c-1,2.6-2,5.4-3.2,8c-3.3,1.3-6,2.9-8.2,4.8c-1.5,1.3-3.2,3.2-3.3,5.2c0,1,0.3,1.8,0.9,2.5 C29.1,71.6,30,72,31,72c3.2,0,6.3-4.4,6.9-5.3c1.2-1.8,2.3-3.8,3.4-6c2.7-1,5.6-1.7,8.4-2.4l1-0.3c0.8-0.2,1.5-0.4,2.4-0.6 c0.9-0.2,1.7-0.5,2.6-0.7c2.9,1.8,6,3,9,3.5c2.6,0.4,4.8,0.2,6.4-0.6C72.5,58.8,72.5,57.7,72.5,57.2z M35.4,65.1 c-1.3,1.9-3.4,4-4.4,4c-0.1,0-0.2,0-0.4-0.2c-0.1-0.1-0.1-0.2-0.1-0.3c0-0.7,1-2,2.3-3.1c1.2-1.1,2.6-2,4.2-2.8 C36.5,63.5,36,64.3,35.4,65.1z M46.2,32.2c0.3-0.6,0.5-0.9,0.7-1.1c0.2,0.4,0.5,1.2,0.6,2.3c0.1,2.3-0.4,4.5-1.1,6.6 C45.5,37.4,45.1,34.5,46.2,32.2z M52.3,54.5c-0.8,0.2-1.6,0.4-2.3,0.6l-1,0.3c-2,0.5-4.1,1-6.1,1.7c0.8-1.9,1.5-3.8,2.2-5.6 c0.5-1.4,1.1-2.8,1.6-4.1c0.3,0.5,0.6,0.9,0.9,1.4c1.4,2.1,3.1,4.1,5.1,5.7C52.5,54.5,52.4,54.5,52.3,54.5z M65.1,57.2 c-1.6-0.2-3.3-0.7-5-1.5c2.9-0.4,5.2-0.3,7.2,0.4c0.5,0.2,1.2,0.6,1.7,1C68.1,57.4,66.7,57.5,65.1,57.2z",
+	  "fill-dn-logo": "M38.7,42.1c1.1,1.8,1.6,4.5,1.6,7.9c0,2.5-0.4,4.6-1.1,6.4c-1.3,3.3-3.6,4.9-6.9,4.9h-6.5V39.3h6.5 C35.5,39.3,37.6,40.2,38.7,42.1z M100,50c0,27.6-22.4,50-50,50S0,77.6,0,50S22.4,0,50,0S100,22.4,100,50z M47.4,49.5 c0-1.8-0.2-3.6-0.6-5.6c-0.4-1.9-1.2-3.8-2.4-5.4c-1.5-2.1-3.4-3.5-5.7-4.3c-1.4-0.5-3.1-0.7-5.2-0.7H19v33.6h14.5 c5.1,0,8.8-2.1,11.3-6.3C46.5,57.7,47.4,53.9,47.4,49.5z M79.8,33.5h-6.5v23.4L59.9,33.5h-7.4v33.6h6.5V43.3l13.7,23.8h7V33.5z"
+	};
+
+	var iconPiles = {
+	  loading: /* array */["stroke-circle"],
+	  search: /* array */[
+	    "stroke-search-lens",
+	    "stroke-search-handle",
+	    "stroke-x-left",
+	    "stroke-x-right"
+	  ],
+	  close: /* array */["stroke-close"],
+	  dropdown: /* array */["stroke-dropdown-caret"],
+	  nodejs: /* array */["stroke-nodejs"],
+	  python: /* array */[
+	    "stroke-python-south",
+	    "stroke-python-north",
+	    "fill-python-south",
+	    "fill-python-north"
+	  ],
+	  octocat: /* array */[
+	    "stroke-circle",
+	    "fill-octocat"
+	  ],
+	  github: /* array */["fill-github"],
+	  google: /* array */[
+	    "fill-google1",
+	    "fill-google2",
+	    "fill-google3",
+	    "fill-google4"
+	  ],
+	  twitter: /* array */["fill-twitter"],
+	  auth0: /* array */["fill-auth0"],
+	  bolt: /* array */["fill-bolt"],
+	  download: /* array */["stroke-download"],
+	  globe: /* array */["stroke-globe"],
+	  settings: /* array */[
+	    "stroke-cog",
+	    "stroke-dot"
+	  ],
+	  reveal: /* array */[
+	    "stroke-eye",
+	    "stroke-dot"
+	  ],
+	  hide: /* array */[
+	    "stroke-eye",
+	    "stroke-dot",
+	    "stroke-xright"
+	  ],
+	  help: /* array */[
+	    "stroke-circle",
+	    "fill-question"
+	  ],
+	  star: /* array */["stroke-star"],
+	  update: /* array */[
+	    "stroke-spin",
+	    "stroke-time"
+	  ],
+	  commit: /* array */["stroke-commit"],
+	  user: /* array */["stroke-user"],
+	  code: /* array */[
+	    "stroke-code-left",
+	    "stroke-code-slash",
+	    "stroke-code-right"
+	  ],
+	  "sound-off": /* array */["stroke-sound"],
+	  "sound-min": /* array */[
+	    "stroke-sound",
+	    "stroke-wave1"
+	  ],
+	  "sound-med": /* array */[
+	    "stroke-sound",
+	    "stroke-wave1",
+	    "stroke-wave2"
+	  ],
+	  "sound-max": /* array */[
+	    "stroke-sound",
+	    "stroke-wave1",
+	    "stroke-wave2",
+	    "stroke-wave3"
+	  ],
+	  "sound-mute": /* array */[
+	    "stroke-sound",
+	    "stroke-wave1",
+	    "stroke-wave2",
+	    "stroke-wave3",
+	    "stroke-slash-backward"
+	  ],
+	  precursor: /* array */["stroke-precursor"],
+	  check: /* array */["stroke-check"],
+	  times: /* array */["stroke-times"],
+	  cursor: /* array */["stroke-cursor"],
+	  rectangle: /* array */["stroke-rectangle"],
+	  line: /* array */["stroke-line"],
+	  text: /* array */["stroke-text"],
+	  pencil: /* array */["stroke-pencil"],
+	  ellipse: /* array */["stroke-ellipse"],
+	  mic: /* array */["stroke-mic"],
+	  "mic-off": /* array */[
+	    "stroke-mic",
+	    "stroke-slash-backward"
+	  ],
+	  users: /* array */["stroke-users"],
+	  bullet: /* array */["stroke-dot"],
+	  chats: /* array */["stroke-chats"],
+	  crosshair: /* array */["stroke-crosshair"],
+	  ibeam: /* array */["stroke-ibeam"],
+	  blog: /* array */["stroke-blog"],
+	  clock: /* array */["stroke-clock"],
+	  delete: /* array */["stroke-delete"],
+	  shift: /* array */["stroke-shift"],
+	  option: /* array */["stroke-option"],
+	  control: /* array */["stroke-control"],
+	  command: /* array */["stroke-command"],
+	  esc: /* array */["stroke-esc"],
+	  space: /* array */["stroke-space"],
+	  mouse: /* array */["stroke-mouse"],
+	  doc: /* array */["stroke-doc"],
+	  docs: /* array */["stroke-docs"],
+	  "docs-team": /* array */["stroke-docs-team"],
+	  newdoc: /* array */["stroke-newdoc"],
+	  login: /* array */["stroke-login"],
+	  logout: /* array */["stroke-logout"],
+	  info: /* array */["stroke-info"],
+	  home: /* array */["stroke-home"],
+	  hash: /* array */["stroke-hash"],
+	  "arrow-up": /* array */["stroke-arrow-up"],
+	  "arrow-down": /* array */["stroke-arrow-down"],
+	  "arrow-left": /* array */["stroke-arrow-left"],
+	  "arrow-right": /* array */["stroke-arrow-right"],
+	  at: /* array */["stroke-at"],
+	  sharing: /* array */["stroke-sharing"],
+	  email: /* array */["stroke-email"],
+	  phone: /* array */["stroke-phone"],
+	  activity: /* array */["stroke-activity"],
+	  credit: /* array */["stroke-credit"],
+	  heart: /* array */["stroke-heart"],
+	  public: /* array */["stroke-public"],
+	  team: /* array */["stroke-team"],
+	  requests: /* array */["stroke-requests"],
+	  minus: /* array */["stroke-horizontal"],
+	  plus: /* array */[
+	    "stroke-horizontal",
+	    "stroke-vertical"
+	  ],
+	  clips: /* array */[
+	    "stroke-border-square",
+	    "stroke-horizontal",
+	    "stroke-vertical"
+	  ],
+	  "read-only": /* array */[
+	    "stroke-read-only",
+	    "fill-read-only"
+	  ],
+	  menu: /* array */[
+	    "stroke-menu-top",
+	    "stroke-menu-mid",
+	    "stroke-menu-btm"
+	  ],
+	  sound: /* array */[
+	    "stroke-sound",
+	    "stroke-wave1",
+	    "stroke-wave2",
+	    "stroke-wave3"
+	  ],
+	  lock: /* array */[
+	    "stroke-private",
+	    "stroke-private-bottom"
+	  ],
+	  private: /* array */[
+	    "stroke-private",
+	    "fill-private"
+	  ],
+	  chat: /* array */[
+	    "stroke-chat",
+	    "fill-chat1",
+	    "fill-x5",
+	    "fill-chat2"
+	  ],
+	  "chat-team": /* array */["stroke-chat-team"],
+	  feedback: /* array */["stroke-feedback"],
+	  click: /* array */[
+	    "fill-click-cursor",
+	    "stroke-click-1",
+	    "stroke-click-2",
+	    "stroke-click-3"
+	  ],
+	  "chat-morph": /* array */[
+	    "stroke-chat",
+	    "fill-x1",
+	    "fill-x2",
+	    "fill-x3",
+	    "fill-x4",
+	    "fill-x5",
+	    "fill-x6",
+	    "fill-x7",
+	    "fill-x8",
+	    "fill-x9"
+	  ],
+	  logomark: /* array */["fill-logomark"],
+	  "google-logo": /* array */["fill-google"],
+	  dribbble: /* array */["fill-dribbble"],
+	  slack: /* array */["fill-slack"],
+	  cognitect: /* array */["fill-cognitect"],
+	  cognician: /* array */["fill-cognician"],
+	  "ph-logo": /* array */["fill-ph-logo"],
+	  "dn-logo": /* array */["fill-dn-logo"],
+	  "file-png": /* array */["fill-png"],
+	  "file-pdf": /* array */["fill-pdf"],
+	  "file-svg": /* array */["fill-code"],
+	  ellipsis: /* array */["fill-ellipsis"],
+	  "dot-menu": /* array */["fill-ellipsis-vertical"],
+	  starred: /* array */["fill-star"],
+	  scroll: /* array */[
+	    "fill-scroll-north",
+	    "fill-dot",
+	    "fill-scroll-south"
+	  ],
+	  north: /* array */[
+	    "fill-up-down",
+	    "fill-north"
+	  ],
+	  south: /* array */[
+	    "fill-up-down",
+	    "fill-south"
+	  ],
+	  east: /* array */[
+	    "fill-left-right",
+	    "fill-east"
+	  ],
+	  west: /* array */[
+	    "fill-left-right",
+	    "fill-west"
+	  ],
+	  "north-south": /* array */[
+	    "fill-up-down",
+	    "fill-north",
+	    "fill-south"
+	  ],
+	  "east-west": /* array */[
+	    "fill-left-right",
+	    "fill-east",
+	    "fill-west"
+	  ]
+	};
+
+	exports.iconPaths = iconPaths;
+	exports.iconPiles = iconPiles;
+	/* No side effect */
 
 
 /***/ }
