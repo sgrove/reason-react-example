@@ -832,6 +832,9 @@ module Wip = {
         <div className="menu left">
           <div className="menu-items channels">
             (searchField state.search (fun term => dispatchEL (SearchUpdated term) ()))
+            <button className="menu-item" onClick=(fun _event => dispatchEL State.(ChannelFocused None) ())>
+              (text "Back")
+            </button>
             (
               ReactRe.listToElement
                 State.(
@@ -845,9 +848,6 @@ module Wip = {
                     )
                 )
             )
-            <button onClick=(fun _event => dispatchEL State.(ChannelFocused None) ())>
-              (text "Back")
-            </button>
           </div>
         </div>
         <div className="chat">
