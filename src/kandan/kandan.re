@@ -244,13 +244,14 @@ let searchField searchTerm onSearchUpdated =>
                     }
                 )
     />
-    <Icon name="search" />
+    /* <Icon name="search" />
     <Icon name="sound-off" />
     <Icon name="sound-min" />
     <Icon name="sound-med" />
     <Icon name="sound-max" />
+    <Icon name="sound-mute" />
     <Icon name="user" />
-    <Icon name="users" />
+    <Icon name="users" /> */
   </div>;
 
 module Wip = {
@@ -893,7 +894,7 @@ module Wip = {
                           )
                           ()
                     )>
-            (text "<<")
+            <Icon name="back" />
           </span>
           <span
             onClick=State.(
@@ -907,15 +908,15 @@ module Wip = {
                         dispatchEL (MediaStateUpdated currentChannel newState) ()
                       }
                     )>
-            (
-              text (
-                switch currentChannel.mediaState {
-                | Playing => " || "
-                | Paused => " > "
-                | NotLoaded => " > "
-                }
-              )
-            )
+            <Icon
+              name=(
+                     switch currentChannel.mediaState {
+                     | Playing => "pause"
+                     | Paused => "play"
+                     | NotLoaded => "play"
+                     }
+                   )
+            />
           </span>
           <span
             onClick=(
@@ -926,7 +927,7 @@ module Wip = {
                           )
                           ()
                     )>
-            (text ">>")
+            <Icon name="next" />
           </span>
         </div>
         <div className="current">
@@ -949,7 +950,6 @@ module Wip = {
               <div className="timeline slider">
                 <Progress_bar
                   progress=(0.0, Utils.channelMediaProgress currentChannel currentChannel.media)
-                  cursor="ew-resize"
                   buffered=(
                              switch currentChannel.media.buffered {
                              | None => None
@@ -1012,7 +1012,6 @@ module Wip = {
           </div>
           <div className="volume slider">
             <Progress_bar
-              cursor="ew-resize"
               buffered=None
               progress=(0.0, state.volume *. 100.0)
               onChanged=(fun offset => dispatchEL State.(VolumeSet offset) ())
