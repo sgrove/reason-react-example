@@ -1,4 +1,13 @@
 let iconPaths = {
+  "fill-play": "M17,12L7,22V2L17,12z",
+  "fill-pause": "M17,22h-4V2h4V22z M11,2H7v20h4V2z",
+  "fill-skip-forwards": "M9.5,22v-5l-5,5V2l5,5V2l10,10L9.5,22z",
+  "fill-skip-backwards": "M4.5,12l10-10v5l5-5v20l-5-5v5L4.5,12z",
+  "stroke-sound": "M12,4.9v14.1l-3.7-3.7H4.9V8.7h3.3L12,4.9z",
+  "stroke-sound-wave1": "M14.4,14.4c0.6-0.6,1-1.4,1-2.4s-0.4-1.8-1-2.4",
+  "stroke-sound-wave2": "M16.7,16.7c1.2-1.2,2-2.9,2-4.7s-0.8-3.5-2-4.7",
+  "stroke-sound-wave3": "M19.1,19.1c1.8-1.8,2.9-4.3,2.9-7.1s-1.1-5.3-2.9-7.1",
+  "stroke-slash-backwards": "M2,2l20,20",
   "stroke-search-lens": "M17,9.5c0,4.1-3.4,7.5-7.5,7.5S2,13.6,2,9.5S5.4,2,9.5,2S17,5.4,17,9.5z",
   "stroke-search-handle": "M14.9,14.9L22,22",
   "stroke-x-left": "M2,2l20,20",
@@ -88,10 +97,6 @@ let iconPaths = {
   "stroke-read-only": "M50,25.9c-18.8,0-35.3,9.6-45,24.1 c9.7,14.5,26.2,24.1,45,24.1S85.3,64.5,95,50C85.3,35.5,68.8,25.9,50,25.9z",
   "stroke-lock-top": "M75,45V30C75,16.2,63.8,5,50,5S25,16.2,25,30v15",
   "stroke-chat": "M50,5c24.9,0,45,20.1,45,45c0,24.9-20.1,45-45,45H5V50 C5,25.1,25.1,5,50,5z",
-  "stroke-sound": "M50,18.2l0,63.6L33.2,65h-15V35h15L50,18.2z",
-  "stroke-wave1": "M60.6,60.6C63.3,57.9,65,54.1,65,50s-1.7-7.9-4.4-10.6",
-  "stroke-wave2": "M71.2,71.2C76.6,65.8,80,58.3,80,50 c0-8.3-3.4-15.8-8.8-21.2",
-  "stroke-wave3": "M81.8,81.8C90,73.7,95,62.4,95,50 c0-12.4-5-23.7-13.2-31.8",
   "stroke-mic": "M80,50c0,16.6-13.4,30-30,30S20,66.6,20,50 M50,5 c-8.3,0-15,6.7-15,15v30c0,8.3,6.7,15,15,15c8.3,0,15-6.7,15-15V20C65,11.7,58.3,5,50,5z M50,80v15 M65,95H35",
   "stroke-slash-forward": "M5,95L95,5",
   "stroke-slash-backward": "M5,5l90,90",
@@ -148,6 +153,10 @@ let iconPaths = {
 };
 
 let iconPiles = {
+  "play": [|"fill-play"|],
+  "pause": [|"fill-pause"|],
+  "next": [|"fill-skip-forwards"|],
+  "back": [|"fill-skip-backwards"|],
   "loading": [|"stroke-circle"|],
   "search": [|"stroke-search-lens", "stroke-search-handle", "stroke-x-left", "stroke-x-right"|],
   "close": [|"stroke-close"|],
@@ -177,15 +186,15 @@ let iconPiles = {
   "user": [|"stroke-user"|],
   "code": [|"stroke-code-left", "stroke-code-slash", "stroke-code-right"|],
   "sound-off": [|"stroke-sound"|],
-  "sound-min": [|"stroke-sound", "stroke-wave1"|],
-  "sound-med": [|"stroke-sound", "stroke-wave1", "stroke-wave2"|],
-  "sound-max": [|"stroke-sound", "stroke-wave1", "stroke-wave2", "stroke-wave3"|],
+  "sound-min": [|"stroke-sound", "stroke-sound-wave1"|],
+  "sound-med": [|"stroke-sound", "stroke-sound-wave1", "stroke-sound-wave2"|],
+  "sound-max": [|"stroke-sound", "stroke-sound-wave1", "stroke-sound-wave2", "stroke-sound-wave3"|],
   "sound-mute": [|
     "stroke-sound",
-    "stroke-wave1",
-    "stroke-wave2",
-    "stroke-wave3",
-    "stroke-slash-backward"
+    "stroke-sound-wave1",
+    "stroke-sound-wave2",
+    "stroke-sound-wave3",
+    "stroke-slash-backwards"
   |],
   "precursor": [|"stroke-precursor"|],
   "check": [|"stroke-check"|],
