@@ -87,16 +87,6 @@ module Progress_bar = {
               | Some cursor => ReactDOMRe.Style.make ::cursor ()
               }
             )>
-      <div
-        className="spent"
-        style={
-                let (progressStart, progressEnd) = props.progress;
-                ReactDOMRe.Style.make
-                  marginLeft::(string_of_float progressStart ^ "%")
-                  width::(string_of_float progressEnd ^ "%")
-                  ()
-              }
-      />
       (
         switch buffered {
         | None => ReactRe.nullElement
@@ -120,6 +110,16 @@ module Progress_bar = {
           ) |> ReactRe.arrayToElement
         }
       )
+      <div
+        className="spent"
+        style={
+                let (progressStart, progressEnd) = props.progress;
+                ReactDOMRe.Style.make
+                  marginLeft::(string_of_float progressStart ^ "%")
+                  width::(string_of_float progressEnd ^ "%")
+                  ()
+              }
+      />
     </div>
   };
 };

@@ -87,6 +87,7 @@
   border-left: @border;
   border-right: @border;
   border-top: @border;
+  border-bottom: none;
   // background: @gray_lightest;
   background: @white;
 }
@@ -152,17 +153,22 @@
   justify-content: center;
 }
 .track {
+  position: relative;
   width: 100%;
   height: @tile_xs / 2;
   margin: 0 @margin;
   border: @border;
-  border-radius: @tile_xs;
+  border-radius: @tile_xs / 2;
 }
 .spent {
-  width: 22%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  // width: 22%;
+  width: 0;
   height: 100%;
   background: @gray_lighter;
-  border-radius: @tile;
+  border-radius: @tile_xs / 2;
 }
 .thumb {
   //
