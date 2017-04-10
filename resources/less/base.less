@@ -30,6 +30,16 @@ body {
 p {
   // margin: 0 0 @tile_xs 0;
   margin: 0 0 @margin 0;
+  ol {
+    li {
+      margin-bottom: @margin;
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: @padding;
+  }
 }
 
 a {
@@ -91,13 +101,14 @@ img {
 
 ol {
   li {
-    margin-bottom: @margin;
+    // margin-bottom: @margin;
   }
 }
 
 ul,
 ol {
-  padding-left: @padding;
+  // padding-left: @padding;
+  padding-left: 0;
 }
 
 audio,
