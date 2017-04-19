@@ -16,13 +16,13 @@
     "director": "^1.2.0",
     "react-dom": "^15.4.2",
     "react": "^15.4.2",
-    "reason-js": "https://github.com/BuckleTypes/reason-js.git",
-    "reason-react": "https://github.com/reasonml/reason-react.git",
+    "reason-js": "0.3.0",
+    "reason-react": "0.1.1",
     "todomvc-app-css": "^2.0.0",
     "todomvc-common": "^1.0.1"
   },
   "devDependencies": {
-    "bs-platform": "https://github.com/bloomberg/bucklescript.git",    
+    "bs-platform": "1.7.1",
     "webpack": "^1.14.0"
   }
 }
