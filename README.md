@@ -11,6 +11,8 @@ npm run build
 # in another tab
 cd resources/public
 python -m SimpleHTTPServer 8001
+# compile less
+less-watch-compiler resources/less resources/public/css app.less
 ```
 
 Then visit http://localhost:8001/ !

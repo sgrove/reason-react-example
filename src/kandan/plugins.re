@@ -368,7 +368,6 @@ let extractImages (message: State.message) :array ReactRe.reactElement =>
           <div className="image-preview">
             <a target="_blank" href=src>
               <img
-                style=(ReactDOMRe.Style.make maxWidth::"100%" maxHeight::"10%" ())
                 title=src
                 className="image-embed"
                 src

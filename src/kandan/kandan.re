@@ -212,47 +212,37 @@ let text = ReactRe.stringToElement;
        </div>;
    }; */
 let searchField searchTerm onSearchUpdated =>
-  <div>
-    <input
-      _type="text"
-      placeholder="Search..."
-      className="query"
-      value=(
-              switch searchTerm {
-              | None => ""
-              | Some term => term
-              }
-            )
-      onChange=(
-                 fun event => {
-                   let x =
-                     switch (
-                       ReasonJs.Dom.HtmlElement.value (
-                         Utils.domAsHtmlElement (ReactEventRe.Form.target event)
-                       )
-                     ) {
-                     | "" => None
-                     | term => Some term
-                     };
-                   onSearchUpdated x
-                 }
-               )
-      onKeyDown=(
-                  fun event =>
-                    if (ReactEventRe.Keyboard.which event == 13) {
-                      ReactEventRe.Keyboard.preventDefault event
-                    }
-                )
-    />
-    /* <Icon name="search" />
-    <Icon name="sound-off" />
-    <Icon name="sound-min" />
-    <Icon name="sound-med" />
-    <Icon name="sound-max" />
-    <Icon name="sound-mute" />
-    <Icon name="user" />
-    <Icon name="users" /> */
-  </div>;
+  <input
+    _type="text"
+    placeholder="Search..."
+    className="query"
+    value=(
+            switch searchTerm {
+            | None => ""
+            | Some term => term
+            }
+          )
+    onChange=(
+               fun event => {
+                 let x =
+                   switch (
+                     ReasonJs.Dom.HtmlElement.value (
+                       Utils.domAsHtmlElement (ReactEventRe.Form.target event)
+                     )
+                   ) {
+                   | "" => None
+                   | term => Some term
+                   };
+                 onSearchUpdated x
+               }
+             )
+    onKeyDown=(
+                fun event =>
+                  if (ReactEventRe.Keyboard.which event == 13) {
+                    ReactEventRe.Keyboard.preventDefault event
+                  }
+              )
+  />;
 
 module Wip = {
   include ReactRe.Component.Stateful;
@@ -734,10 +724,10 @@ module Wip = {
       ) |> Array.of_list;
     let userEntry (user: State.user) =>
       State.(
-        <li className="user" title=(Utils.nameOfUser user) key=(string_of_int user.id)>
+        <div className="user" title=(Utils.nameOfUser user) key=(string_of_int user.id)>
           <img className="avatar" src=(Utils.gravatarUrl user.email) />
           <span> (ReactRe.stringToElement (Utils.nameOfUser user)) </span>
-        </li>
+        </div>
       );
     let channelEntry spotlightChannelId (channel: State.channel) => {
       open State;
@@ -768,9 +758,9 @@ module Wip = {
         switch spotlightChannelId {
         | None => ReactRe.nullElement
         | Some _ =>
-          <ul className="channel-users-list">
+          <div className="channel-users-list">
             (ReactRe.listToElement (List.map userEntry filteredUsers))
-          </ul>
+          </div>
         };
       let channelEntry =
         <div onClick=(fun _ => dispatchEL (ChannelSelected channel) ()) className="menu-item">
@@ -783,12 +773,12 @@ module Wip = {
       }
     };
     let songEntry media =>
-      <li
+      <div
         className="menu-item"
         onClick=(fun _ => dispatchEL State.(SongSelected currentChannel media) ())>
         <div className="menu-thumbnail"> <img src="https://placehold.it/64" /> </div>
         <div className="menu-text"> (text (Utils.mediaSrcToTitle media)) </div>
-      </li>;
+      </div>;
     <div className="container">
       <Page_title title=(pageTitleOfChannel currentChannel) />
       <Routes
@@ -848,6 +838,7 @@ module Wip = {
                     )
                 )
             )
+            userEntries
           </div>
         </div>
         <div className="chat">
@@ -860,7 +851,7 @@ module Wip = {
                     List.find (fun (user: State.user) => user.id === activity.userId) state.users;
                   let (renderableMessage, media, _media_count) =
                     Plugins.renderableOfMessage me state.users currentChannel activity;
-                  <div>
+                  <div className="chat-message">
                     <img className="avatar" src=(Utils.gravatarUrl user.email) />
                     (ReactRe.arrayToElement renderableMessage)
                     <div className="media-container"> media </div>
@@ -879,13 +870,14 @@ module Wip = {
         </div>
         <div className="menu right">
           <div className="menu-items songs">
-            <ul> (ReactRe.listToElement (List.map songEntry filteredPlaylist)) </ul>
+             (ReactRe.listToElement (List.map songEntry filteredPlaylist))
           </div>
         </div>
       </div>
       <div className="player">
         <div className="left controls">
-          <span
+          <div
+            className="action"
             onClick=(
                       fun _event =>
                         dispatchEL
@@ -895,8 +887,9 @@ module Wip = {
                           ()
                     )>
             <Icon name="back" />
-          </span>
-          <span
+          </div>
+          <div
+            className="action"
             onClick=State.(
                       fun _event => {
                         let newState =
@@ -917,8 +910,9 @@ module Wip = {
                      }
                    )
             />
-          </span>
-          <span
+          </div>
+          <div
+            className="action"
             onClick=(
                       fun _event =>
                         dispatchEL
@@ -928,7 +922,7 @@ module Wip = {
                           ()
                     )>
             <Icon name="next" />
-          </span>
+          </div>
         </div>
         <div className="current">
           <div className="album">
@@ -985,7 +979,7 @@ module Wip = {
                 (
                   text (
                     switch currentChannel.media.duration {
-                    | None => "Not Loaded"
+                    | None => "0:00"
                     | Some duration =>
                       let seconds = int_of_float (float_of_int (duration mod 60));
                       string_of_int (duration / 60) ^
@@ -995,6 +989,7 @@ module Wip = {
                 )
               </div>
             </div>
+            <div className="title"> (text (Utils.mediaSrcToTitle currentChannel.media)) </div>
           </div>
         </div>
         <div className="right controls">

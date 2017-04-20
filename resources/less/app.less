@@ -7,7 +7,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  // min-height: 100vh;
+  height: 100vh;
 }
 .atop {
   display: flex;
@@ -35,22 +36,42 @@
   // width: @tile_xl * 1.5;
   // width: @tile_xl;
   width: @aside;
-  &.right {
-    color: @gray_light;
-    background: @gray_darker;
+  &.left {
+    border-right: @border;
   }
+  &.right {
+    // color: @gray_light;
+    color: @gray;
+    background: @gray_darker;
+    box-shadow+: 0 -1px fade(@white, 21) inset;
+    box-shadow+: 0 -2px fade(@black, 55) inset;
+  }
+}
+.query {
+  width: 100%;
+  height: @tile;
+  padding: (@padding - @tile_xxs) @padding;
+  box-shadow: 0 1px @border_color;
 }
 .menu-items {
   //
 }
 .menu-item {
+  .ahack();
   display: flex;
   align-items: center;
   width: 100%;
   height: @tile;
-  padding-left: @padding;
+  // padding-left: @padding;
+  padding: 0 @padding;
+}
+.menu-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .menu-thumbnail {
+  display: none; // TODO(danny) hold off until album art is ready
   // margin-right: @margin;
   margin-right: @tile_xs;
   img {
@@ -72,32 +93,71 @@
 }
 .chat-feed {
   flex: 1;
+  // he
   padding: @padding;
-  border-right: @border;
-  border-left: @border;
-  border-top: @border;
+  border-bottom: @border;
+  // border-right: @border;
+  // border-left: @border;
+  // border-top: @border;
   background: @white;
+  overflow-y: auto;
+}
+.chat-message {
+  // margin-bottom: @margin;
+  padding: @padding;
+  // border-top: @border;
+  border-bottom: @border_width @border_style @border_color;
+  // border-bottom: @border_width dotted @gray_light;
+  > a {
+    color: @blue_deep;
+    &:hover {
+      color: @blue;
+    }
+  }
+  .quote-wrapper {
+    > a {
+      color: @blue_deep;
+      &:hover {
+        color: @blue;
+      }
+    }
+  }
+  > em {
+    > img {
+      max-height: @padding;
+    }
+  }
+}
+.avatar {
+  margin-right: @tile_xs;
 }
 .chat-input {
   display: flex;
   align-items: center;
-  padding: 0 @padding;
+  // padding: 0 @padding;
+  padding: (@padding - @tile_xxs) @padding;
   // border: @border;
   height: @tile;
-  border-left: @border;
-  border-right: @border;
-  border-top: @border;
-  border-bottom: none;
+  // border-left: @border;
+  // border-right: @border;
+  // border-top: @border;
+  // border-bottom: none;
   // background: @gray_lightest;
   background: @white;
+  resize: none;
 }
 .player {
-  color: @gray_light;
+  // color: @gray_light;
+  color: @gray;
   display: flex;
+  height: @tile + @padding + @padding;
   // height: @tile * 2;
   // height: @tile * 1.5;
   // border-top: @border;
   background: @gray_darker;
+  .icon {
+    display: flex;
+  }
 }
 .controls {
   display: flex;
@@ -105,8 +165,21 @@
   justify-content: center;
   width: @aside;
   &.right {
-    box-shadow: 0 -1px @gray_dark;
+    // box-shadow+: 0 -1px @gray_darker;
+    // box-shadow+: 0 1px @gray_dark inset;
+    // box-shadow+: 0 -1px fade(@white, 13);
+    // box-shadow+: 0 -2px fade(@black, 55);
   }
+}
+.action {
+  .ahack();
+  // color: @gray_light;
+  font-size: @padding;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: @tile;
+  height: @tile;
 }
 .current {
   flex: 1;
@@ -114,6 +187,7 @@
   align-items: center;
 }
 .album {
+  display: none; // TODO(danny) hold off on this until album artwork is ready
   margin-right: @margin;
   // padding: @padding;
   padding: @padding 0;
@@ -130,6 +204,7 @@
 .title {
   text-align: center;
   line-height: 1;
+  padding: @tile_xxs 0;
 }
 .artist {
   text-align: center;
@@ -177,13 +252,25 @@
   //
 }
 .mute {
+  .ahack();
+  font-size: @padding;
   margin-left: @margin;
+  // .icon {
+  //   display: flex;
+  // }
 }
 .volume {
   width: @aside;
 }
 .mention {
-  background-color: blue;
+  // .outline(fade(@black, 13));
+  color: @blue_deep;
+  background-color: fade(@black, 5);
+  padding: 0 @tile_xxs;
+  border-radius: @tile_xxs;
+  &:before {
+    content: "@";
+  }
 };
 
 .color-preview {
@@ -192,3 +279,35 @@
   border-radius: 10px;
   display: inline-block;
 };
+
+.media-container {
+  display: flex;
+  // margin-top: @tile_xxs;
+  margin-top: @margin / 2;
+  // max-height: @tile_xl / 2;
+  // max-height: @tile_xl;
+  // padding: @tile_xxs;
+  // border: @border;
+  // border-radius: @tile_xxs;
+  // overflow: hidden;
+  .media-section {
+    // max-height: @tile_xl / 2;
+    // padding: @tile_xxs;
+    // border: @border;
+    // border-radius: @tile_xxs;
+    // overflow: hidden;
+  }
+  .image-preview {
+    a {
+      display: flex;
+      max-height: @tile_xl / 2;
+      padding: @tile_xxs;
+      border: @border;
+      border-radius: @tile_xxs;
+      overflow: hidden;
+      img {
+        object-fit: scale-down;
+      }
+    }
+  }
+}

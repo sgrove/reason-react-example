@@ -223,3 +223,12 @@
     animation-delay: @s * (@i - 1);
   }
 }
+
+.ahack() {
+  cursor: pointer;
+  transition+: @run @fadein @now color;
+  &:hover {
+    color: @blue_deep;
+    transition+: @run_fast @fadein @now color;
+  }
+}
