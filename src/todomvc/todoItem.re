@@ -10,20 +10,20 @@ module TodoItem = {
   type props = {
     todo,
     editing: bool,
-    onDestroy: ReactRe.event => unit,
+    onDestroy: unit => unit,
     onSave: string => unit,
     onEdit: unit => unit,
-    onToggle: ReactRe.event => unit,
-    onCancel: ReactRe.event => unit
+    onToggle: unit => unit,
+    onCancel: unit => unit
   };
   type state = {editText: string};
-  type instanceVars = {mutable editFieldRef: option ReactRe.reactRef};
+  type instanceVars = {mutable editFieldRef: option Dom.element};
   let getInstanceVars () => {editFieldRef: None};
   let getInitialState props => {editText: props.todo.title};
-  let handleSubmit {props, state} event =>
+  let handleSubmit {props, state} _ =>
     switch (String.trim state.editText) {
     | "" =>
-      props.onDestroy event;
+      props.onDestroy ();
       None
     | nonEmptyValue =>
       props.onSave nonEmptyValue;
@@ -34,22 +34,19 @@ module TodoItem = {
     Some {editText: props.todo.title}
   };
   let handleKeyDown ({props} as componentBag) event =>
-    if (event##which === escapeKey) {
-      props.onCancel event;
+    if (ReactEventRe.Keyboard.which event === escapeKey) {
+      props.onCancel ();
       Some {editText: props.todo.title}
     } else if (
-      event##which === enterKey
+      ReactEventRe.Keyboard.which event === enterKey
     ) {
-      handleSubmit componentBag event
+      handleSubmit componentBag ()
     } else {
       None
     };
-  let handleChange {props} (event: ReactRe.event) =>
-    switch (props.editing, ReasonJs.Dom.Element.asHtmlElement event##target) {
-    | (true, Some el) => Some {editText: ReasonJs.HtmlElement.value el}
-    | (true, None) => raise (Failure "Invalid event target passed to todoItem handleChange")
-    | _ => None
-    };
+  let handleChange {props} event =>
+    props.editing ?
+      Some {editText: (ReactDOMRe.domElementToObj (ReactEventRe.Form.target event))##value} : None;
   let setEditFieldRef {instanceVars} r => instanceVars.editFieldRef = Some r;
 
   /**
@@ -61,13 +58,13 @@ module TodoItem = {
   let componentDidUpdate ::prevProps prevState::_ {props, instanceVars} =>
     switch (prevProps.editing, props.editing, instanceVars.editFieldRef) {
     | (false, true, Some field) =>
-      let node = ReactDOMRe.domElementToObj (ReactDOMRe.findDOMNode field);
+      let node = ReactDOMRe.domElementToObj field;
       ignore (node##focus ());
       ignore (node##setSelectionRange node##value##length node##value##length);
       None
     | _ => None
     };
-  let render {props, state, updater, refSetter} => {
+  let render {props, state, updater, handler} => {
     let {todo, editing, onDestroy, onToggle} = props;
     let className =
       [todo.completed ? "completed" : "", editing ? "editing" : ""] |> String.concat " ";
@@ -77,13 +74,13 @@ module TodoItem = {
           className="toggle"
           _type="checkbox"
           checked=(Js.Boolean.to_js_boolean todo.completed)
-          onChange=onToggle
+          onChange=(fun _ => onToggle ())
         />
         <label onDoubleClick=(updater handleEdit)> (ReactRe.stringToElement todo.title) </label>
-        <button className="destroy" onClick=onDestroy />
+        <button className="destroy" onClick=(fun _ => onDestroy ()) />
       </div>
       <input
-        ref=(refSetter setEditFieldRef)
+        ref=(handler setEditFieldRef)
         className="edit"
         value=state.editText
         onBlur=(updater handleSubmit)

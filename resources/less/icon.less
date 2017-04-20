@@ -1,0 +1,28 @@
+@menu_padding: 1.5rem; // TODO fix naming convention here
+
+.iconpile {
+  width: 1em;
+  height: 1em;
+  [class|="stroke"] {
+    fill: none;
+    // stroke: @gray_dark;
+    stroke: currentColor;
+    stroke-width: 1.5;
+  }
+  [class|="fill"] {
+    // fill: @gray_dark;
+    fill: currentColor;
+    stroke: none;
+  }
+}
+.icon-loading {
+  .iconpile {
+    font-size: @menu_padding;
+    animation: loading-rotate (4 * @run_slower) linear infinite;
+  }
+  .stroke-border-circle {
+    stroke: @gray_lighter;
+    stroke-linecap: round;
+    animation: loading-dash (3 * @run_slower) linear infinite;
+  }
+}

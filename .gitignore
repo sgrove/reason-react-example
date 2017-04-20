@@ -5,3 +5,7 @@
 /bundledOutputs/
 npm-debug.log
 /_build/
+
+resources/public/js/kandan.js
+
+resources/public/css/app.css

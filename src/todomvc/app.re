@@ -2,12 +2,16 @@ type router = Js.t {. init : (string => unit) [@bs.meth]};
 
 external routerMake : Js.t {..} => router = "Router" [@@bs.module "director"] [@@bs.new];
 
-let enterKey = 13;
+external unsafeJsonParse : string => 'a = "JSON.parse" [@@bs.val];
 
 let namespace = "reason-react-todos";
 
 let saveLocally todos =>
-  ReasonJs.Storage.setItem namespace (ReasonJs.Json.stringify todos) ReasonJs.Storage.localStorage;
+  switch (Js.Json.stringifyAny todos) {
+  | None => ()
+  | Some stringifiedTodos =>
+    ReasonJs.Storage.setItem namespace stringifiedTodos ReasonJs.Storage.localStorage
+  };
 
 module Top = {
   module TodoApp = {
@@ -24,7 +28,7 @@ module Top = {
       let todos =
         switch (ReasonJs.Storage.getItem namespace ReasonJs.Storage.localStorage) {
         | None => []
-        | Some todos => ReasonJs.Json.parse todos
+        | Some todos => unsafeJsonParse todos
         };
       {nowShowing: AllTodos, editing: None, newTodo: "", todos}
     };
@@ -37,13 +41,13 @@ module Top = {
       None
     };
     let handleChange {state} event =>
-      switch (ReasonJs.Dom.Element.asHtmlElement event##target) {
-      | Some el => Some {...state, newTodo: ReasonJs.HtmlElement.value el}
-      | None => raise (Failure "Invalid event target passed to app handleChange")
+      Some {
+        ...state,
+        newTodo: (ReactDOMRe.domElementToObj (ReactEventRe.Form.target event))##value
       };
     let handleNewTodoKeyDown {state} event =>
-      if (event##keyCode === enterKey) {
-        event##preventDefault ();
+      if (ReactEventRe.Keyboard.keyCode event === 13 /* enter key */) {
+        ReactEventRe.Keyboard.preventDefault event;
         switch (String.trim state.newTodo) {
         | "" => None
         | nonEmptyValue =>
@@ -57,15 +61,13 @@ module Top = {
       } else {
         None
       };
-    let toggleAll {state} (event: ReactRe.event) =>
-      switch (ReasonJs.Dom.Element.asHtmlElement event##target) {
-      | Some el =>
-        let checked = ReasonJs.HtmlElement.checked el;
-        let todos = List.map (fun todo => {...todo, TodoItem.completed: checked}) state.todos;
-        saveLocally todos;
-        Some {...state, todos}
-      | None => raise (Failure "Invalid event target passed to app toggleAll")
-      };
+    let toggleAll {state} event => {
+      let checked = (ReactDOMRe.domElementToObj (ReactEventRe.Form.target event))##checked;
+      let todos =
+        List.map (fun todo => {...todo, TodoItem.completed: Js.to_bool checked}) state.todos;
+      saveLocally todos;
+      Some {...state, todos}
+    };
     let toggle todoToToggle {state} _ => {
       let todos =
         List.map
@@ -177,10 +179,4 @@ module Top = {
   let createElement = wrapProps ();
 };
 
-switch (
-  ReasonJs.HtmlCollection.item
-    0 (ReasonJs.Document.getElementsByClassName "todoapp" ReasonJs.Dom.document)
-) {
-| None => raise (Invalid_argument "Root element 'todoapp' not found in document")
-| Some el => ReactDOMRe.render <Top /> el
-};
+ReactDOMRe.renderToElementWithClassName <Top /> "todoapp";

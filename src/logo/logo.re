@@ -1,3 +1,5 @@
+external requestAnimationFrame : (unit => unit) => unit = "" [@@bs.val];
+
 open Constants;
 
 module Logo = {
@@ -25,9 +27,9 @@ module Logo = {
         {...state, degrees: nextDegrees, velocity: nextVelocity, lastMs: now}
       };
       setState stateSetter;
-      ReasonJs.requestAnimationFrame onAnimationFrame
+      requestAnimationFrame onAnimationFrame
     };
-    ReasonJs.requestAnimationFrame onAnimationFrame;
+    requestAnimationFrame onAnimationFrame;
     None
   };
   let name = "Logo";
@@ -63,25 +65,27 @@ module Logo = {
    */
   let handleMouseDown {state} _ /* event */ => Some {...state, drag: mouseDownDrag};
   let render {props, state, updater} => {
-    let transform = Printf.sprintf "rotate(%fdeg)" state.degrees;
+    let transform = "rotate(" ^ string_of_float state.degrees ^ "deg)";
     /* To create JS Objects in Reason, */
-    let rotationStyle = {"transformOrigin": "50% 50%", "transform": transform};
+    let rotationStyle = ReactDOMRe.Style.make transformOrigin::"50% 50%" ::transform ();
     <div
-      style={
-              "color": "#444444",
-              "WebkitUserSelect": "none",
-              "paddingTop": "40px",
-              "fontSize": "68px",
-              "fontFamily": "Montserrat",
-              "textAlign": "center"
-            }>
+      style=(
+              ReactDOMRe.Style.make
+                color::"#444444"
+                userSelect::"none"
+                paddingTop::"40px"
+                fontSize::"68px"
+                fontFamily::"Montserrat"
+                textAlign::"center"
+                ()
+            )>
       (ReactRe.stringToElement props.message)
       <svg
         width="100%"
         height="100%"
         viewBox="0 0 700 700"
         version="1.1"
-        style={"cursor": "pointer"}
+        style=(ReactDOMRe.Style.make cursor::"pointer" ())
         onMouseUp=(updater handleMouseUp)
         onMouseDown=(updater handleMouseDown)>
         (renderGraphic rotationStyle)
